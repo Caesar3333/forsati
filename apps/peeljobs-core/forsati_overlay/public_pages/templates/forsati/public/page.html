@@ -1,0 +1,17 @@
+{% extends "forsati/layout/base.html" %}
+{% block page_title %}{{ page_title }}{% endblock %}
+{% block meta %}
+  <meta name="description" content="{{ meta_description }}" />
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {% for lang, href in hreflang_urls.items %}
+    <link rel="alternate" href="{{ href }}" hreflang="{{ lang }}" />
+  {% endfor %}
+{% endblock %}
+{% block content %}
+  <article class="forsati-public-page">
+    <h1>{{ page_title }}</h1>
+    {% for paragraph in page_body %}
+      <p>{{ paragraph }}</p>
+    {% endfor %}
+  </article>
+{% endblock %}

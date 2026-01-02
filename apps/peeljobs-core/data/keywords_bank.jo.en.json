@@ -1,0 +1,74 @@
+{
+  "country": "JO",
+  "language": "en",
+  "packs": [
+    {
+      "name": "Soft Skills",
+      "tags": ["soft", "core"],
+      "items": [
+        {"kw": "Teamwork", "weight": 5, "syn": ["Collaboration", "Working in teams"], "tags": ["soft"]},
+        {"kw": "Time management", "weight": 5, "syn": ["Prioritization", "Scheduling"], "tags": ["soft"]},
+        {"kw": "Problem solving", "weight": 4, "syn": ["Troubleshooting", "Issue analysis"], "tags": ["soft"]},
+        {"kw": "Communication", "weight": 4, "syn": ["Presentation", "Interpersonal"], "tags": ["soft"]},
+        {"kw": "Leadership", "weight": 3, "syn": ["Team lead", "Mentoring"], "tags": ["soft"]}
+      ]
+    },
+    {
+      "name": "HR & Administration",
+      "tags": ["admin", "hr"],
+      "items": [
+        {"kw": "HR Operations", "weight": 5, "syn": ["People operations", "Employee services"], "tags": ["hr"]},
+        {"kw": "Recruitment", "weight": 5, "syn": ["Talent acquisition", "Selection"], "tags": ["hr"]},
+        {"kw": "Payroll", "weight": 4, "syn": ["Payroll processing", "Salary sheets"], "tags": ["hr"]},
+        {"kw": "Jordan labor law", "weight": 4, "syn": ["Labor compliance", "Work regulations"], "tags": ["compliance"]}
+      ]
+    },
+    {
+      "name": "Information Technology",
+      "tags": ["it", "tech"],
+      "items": [
+        {"kw": "Software development", "weight": 5, "syn": ["Programming", "Coding"], "tags": ["engineering"]},
+        {"kw": "Databases", "weight": 4, "syn": ["SQL", "Database administration"]},
+        {"kw": "Cybersecurity", "weight": 4, "syn": ["Information security", "Data protection"], "tags": ["security"]},
+        {"kw": "Data analysis", "weight": 4, "syn": ["Analytics", "Business intelligence"], "tags": ["data"]},
+        {"kw": "Networking", "weight": 3, "syn": ["Network administration", "LAN/WAN"]}
+      ]
+    },
+    {
+      "name": "Hospitality & Tourism",
+      "tags": ["hospitality"],
+      "items": [
+        {"kw": "Reservations management", "weight": 4, "syn": ["Bookings", "Reservation systems"]},
+        {"kw": "Customer service", "weight": 4, "syn": ["Front desk", "Guest relations"], "tags": ["support"]},
+        {"kw": "Floor supervision", "weight": 3, "syn": ["Operations supervision"]}
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "tags": ["health"],
+      "items": [
+        {"kw": "Nursing", "weight": 5, "syn": ["RN", "Patient care"], "tags": ["clinical"]},
+        {"kw": "Patient safety", "weight": 4, "syn": ["Quality of care"], "tags": ["quality"]},
+        {"kw": "Medical records", "weight": 3, "syn": ["Health information", "Chart management"]}
+      ]
+    },
+    {
+      "name": "Education & Training",
+      "tags": ["education"],
+      "items": [
+        {"kw": "Curriculum development", "weight": 4, "syn": ["Content design", "Learning paths"]},
+        {"kw": "Vocational training", "weight": 4, "syn": ["Technical training", "Workforce development"]},
+        {"kw": "Academic advising", "weight": 3, "syn": ["Student guidance"]}
+      ]
+    },
+    {
+      "name": "Freelance & Projects",
+      "tags": ["freelance", "projects"],
+      "items": [
+        {"kw": "Project management", "weight": 5, "syn": ["PMO", "Project delivery"], "tags": ["pm"]},
+        {"kw": "Contracts", "weight": 3, "syn": ["Work agreements", "Statements of work"]},
+        {"kw": "Deliverables", "weight": 3, "syn": ["Milestones", "Outputs"]}
+      ]
+    }
+  ]
+}

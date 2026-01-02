@@ -1,0 +1,74 @@
+{
+  "country": "JO",
+  "language": "ar",
+  "packs": [
+    {
+      "name": "المهارات العامة",
+      "tags": ["soft", "core"],
+      "items": [
+        {"kw": "العمل ضمن فريق", "weight": 5, "syn": ["روح الفريق", "Teamwork"], "tags": ["soft"]},
+        {"kw": "إدارة الوقت", "weight": 5, "syn": ["تنظيم الوقت"], "tags": ["soft"]},
+        {"kw": "حل المشكلات", "weight": 4, "syn": ["حلول مبتكرة", "تحليل المشاكل"], "tags": ["soft"]},
+        {"kw": "التواصل", "weight": 4, "syn": ["مهارات التواصل", "اتصال فعال"], "tags": ["soft"]},
+        {"kw": "القيادة", "weight": 3, "syn": ["قيادة فرق العمل"], "tags": ["soft"]}
+      ]
+    },
+    {
+      "name": "إداري وموارد بشرية",
+      "tags": ["admin", "hr"],
+      "items": [
+        {"kw": "شؤون الموظفين", "weight": 5, "syn": ["HR Operations", "خدمات العاملين"], "tags": ["hr"]},
+        {"kw": "التوظيف والاختيار", "weight": 5, "syn": ["استقطاب", "Recruitment"], "tags": ["hr"]},
+        {"kw": "إعداد الرواتب", "weight": 4, "syn": ["كشوف الرواتب", "Payroll"], "tags": ["hr"]},
+        {"kw": "قوانين العمل الأردنية", "weight": 4, "syn": ["تشريعات العمل", "Labor Law"], "tags": ["compliance"]}
+      ]
+    },
+    {
+      "name": "تقنية المعلومات",
+      "tags": ["it", "tech"],
+      "items": [
+        {"kw": "تطوير البرمجيات", "weight": 5, "syn": ["برمجة", "Software Development"], "tags": ["engineering"]},
+        {"kw": "قواعد البيانات", "weight": 4, "syn": ["SQL", "Database"]},
+        {"kw": "أمن المعلومات", "weight": 4, "syn": ["Cybersecurity", "حماية البيانات"], "tags": ["security"]},
+        {"kw": "تحليل البيانات", "weight": 4, "syn": ["Data Analytics", "ذكاء الأعمال"], "tags": ["data"]},
+        {"kw": "شبكات", "weight": 3, "syn": ["Networking", "إدارة الشبكات"]}
+      ]
+    },
+    {
+      "name": "الضيافة والسياحة",
+      "tags": ["hospitality"],
+      "items": [
+        {"kw": "إدارة الحجوزات", "weight": 4, "syn": ["Bookings", "حجوزات الفنادق"]},
+        {"kw": "خدمة العملاء", "weight": 4, "syn": ["استقبال", "Customer Service"], "tags": ["support"]},
+        {"kw": "الإشراف الميداني", "weight": 3, "syn": ["Floor Supervision"]}
+      ]
+    },
+    {
+      "name": "الرعاية الصحية",
+      "tags": ["health"],
+      "items": [
+        {"kw": "تمريض", "weight": 5, "syn": ["Nursing"], "tags": ["clinical"]},
+        {"kw": "سلامة المرضى", "weight": 4, "syn": ["Patient Safety"], "tags": ["quality"]},
+        {"kw": "سجلات طبية", "weight": 3, "syn": ["Medical Records", "إدارة ملفات"]}
+      ]
+    },
+    {
+      "name": "التعليم والتدريب",
+      "tags": ["education"],
+      "items": [
+        {"kw": "تطوير مناهج", "weight": 4, "syn": ["Curriculum Development"]},
+        {"kw": "تدريب مهني", "weight": 4, "syn": ["Vocational Training"]},
+        {"kw": "إرشاد أكاديمي", "weight": 3, "syn": ["Academic Advising"]}
+      ]
+    },
+    {
+      "name": "العمل الحر والمشاريع",
+      "tags": ["freelance", "projects"],
+      "items": [
+        {"kw": "إدارة مشاريع", "weight": 5, "syn": ["Project Management", "PMO"], "tags": ["pm"]},
+        {"kw": "اتفاقيات عمل", "weight": 3, "syn": ["Contracts", "عقود"]},
+        {"kw": "تسليم مهام", "weight": 3, "syn": ["Deliverables"]}
+      ]
+    }
+  ]
+}
