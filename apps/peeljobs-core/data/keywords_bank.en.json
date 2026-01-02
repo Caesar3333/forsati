@@ -1,0 +1,86 @@
+{
+  "country": "JO",
+  "language": "en",
+  "packs": [
+    {
+      "name": "Core Soft Skills",
+      "tags": ["soft_skills", "core"],
+      "items": [
+        {"kw": "Teamwork", "weight": 5, "syn": ["Collaboration", "Working in teams"]},
+        {"kw": "Time management", "weight": 5, "syn": ["Prioritization", "Scheduling"]},
+        {"kw": "Problem solving", "weight": 5, "syn": ["Troubleshooting", "Root-cause analysis"]},
+        {"kw": "Analytical thinking", "weight": 4, "syn": ["Data-driven", "Critical thinking"]},
+        {"kw": "Communication skills", "weight": 5, "syn": ["Verbal communication", "Written communication"]},
+        {"kw": "Leadership", "weight": 4, "syn": ["Team leadership", "Mentoring"]},
+        {"kw": "Commitment", "weight": 4, "syn": ["Reliability", "Discipline"]},
+        {"kw": "Adaptability", "weight": 3, "syn": ["Flexibility", "Change readiness"]}
+      ]
+    },
+    {
+      "name": "Administration & HR",
+      "tags": ["admin", "hr", "office"],
+      "items": [
+        {"kw": "Human Resources", "weight": 5, "syn": ["HR", "People operations"]},
+        {"kw": "Recruitment & Selection", "weight": 5, "syn": ["Talent acquisition", "Hiring"]},
+        {"kw": "Payroll", "weight": 4, "syn": ["Payroll processing", "Compensation"]},
+        {"kw": "Performance Evaluation", "weight": 4, "syn": ["KPIs", "Performance management"]},
+        {"kw": "Jordan labor law compliance", "weight": 5, "syn": ["Labor law", "Employment law"]},
+        {"kw": "Attendance systems", "weight": 3, "syn": ["Time & attendance", "Biometric systems"]}
+      ]
+    },
+    {
+      "name": "Information Technology",
+      "tags": ["it", "software", "data"],
+      "items": [
+        {"kw": "Software Development", "weight": 5, "syn": ["Programming", "Application development"]},
+        {"kw": "Databases", "weight": 4, "syn": ["SQL", "Data modeling"]},
+        {"kw": "Cybersecurity", "weight": 5, "syn": ["InfoSec", "Security operations"]},
+        {"kw": "Artificial Intelligence", "weight": 4, "syn": ["Machine Learning", "AI"]},
+        {"kw": "Data Analysis", "weight": 4, "syn": ["Business intelligence", "Analytics"]},
+        {"kw": "Networking", "weight": 3, "syn": ["Infrastructure", "LAN/WAN"]}
+      ]
+    },
+    {
+      "name": "Hospitality & Tourism",
+      "tags": ["hospitality", "tourism"],
+      "items": [
+        {"kw": "Hospitality", "weight": 4, "syn": ["Hotels", "Guest services"]},
+        {"kw": "Restaurants", "weight": 4, "syn": ["Food service", "Dining"]},
+        {"kw": "Customer Service", "weight": 5, "syn": ["Front desk", "Guest relations"]},
+        {"kw": "Reservations Management", "weight": 4, "syn": ["Bookings", "Reservation systems"]},
+        {"kw": "Field supervision", "weight": 3, "syn": ["Supervisor", "On-site supervision"]}
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "tags": ["health", "medical"],
+      "items": [
+        {"kw": "Nursing", "weight": 5, "syn": ["Nurse", "Patient care"]},
+        {"kw": "Laboratories", "weight": 4, "syn": ["Lab technician", "Medical labs"]},
+        {"kw": "Medical Records", "weight": 4, "syn": ["Health records", "Patient files"]},
+        {"kw": "Hospital Administration", "weight": 4, "syn": ["Health management", "Facility management"]},
+        {"kw": "Patient Safety", "weight": 5, "syn": ["Quality of care", "Safety"]}
+      ]
+    },
+    {
+      "name": "Education & Training",
+      "tags": ["education", "training"],
+      "items": [
+        {"kw": "Education", "weight": 5, "syn": ["Teaching", "Instruction"]},
+        {"kw": "Vocational Training", "weight": 4, "syn": ["Skills training", "Workforce development"]},
+        {"kw": "Curriculum Development", "weight": 4, "syn": ["Course design", "Content development"]},
+        {"kw": "Academic Advising", "weight": 3, "syn": ["Student advising", "Guidance"]}
+      ]
+    },
+    {
+      "name": "Freelance & Projects",
+      "tags": ["freelance", "projects"],
+      "items": [
+        {"kw": "Freelancing", "weight": 4, "syn": ["Independent contractor", "Gig"]},
+        {"kw": "Project Management", "weight": 5, "syn": ["PM", "Delivery management"]},
+        {"kw": "Contracts", "weight": 3, "syn": ["Agreements", "Statements of Work"]},
+        {"kw": "Invoicing", "weight": 3, "syn": ["Billing", "Receivables"]}
+      ]
+    }
+  ]
+}

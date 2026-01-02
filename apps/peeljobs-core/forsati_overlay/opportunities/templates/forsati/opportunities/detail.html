@@ -1,0 +1,54 @@
+{% extends "forsati/layout/base.html" %}
+{% block page_title %}{{ meta_title }}{% endblock %}
+{% block meta %}
+  <meta name="description" content="{{ meta_description }}" />
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {% for lang, href in hreflang_urls.items %}
+    <link rel="alternate" href="{{ href }}" hreflang="{{ lang }}" />
+  {% endfor %}
+{% endblock %}
+{% block content %}
+{% if opportunity %}
+  <article class="card">
+    <h1>{{ opportunity.title }}</h1>
+    <div class="org">{{ opportunity.organization_name }} — {{ opportunity.get_type_display }}</div>
+    <div class="meta">{{ opportunity.location }}{% if opportunity.is_remote %} · Remote{% endif %}</div>
+    <p class="description">{{ opportunity.description }}</p>
+  </article>
+  {% if candidate_keywords %}
+    <section class="card">
+      <h2>كلمات مفتاحية موصى بها للمتقدم / Candidate Suggested Keywords</h2>
+      <p class="hint">ادمج هذه الكلمات في سيرتك أو رسالة التغطية لتحسين التطابق.</p>
+      <div class="chips">
+        {% for kw in candidate_keywords %}
+          <span class="chip">{{ kw.keyword }}</span>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+  {% if recruiter_suggestions %}
+    <section class="card">
+      <h2>اقتراحات للمعلن / Recruiter Clarity Suggestions</h2>
+      <p class="hint">أضف كلمات واضحة لتحسين فهْم المرشحين ومحركات البحث.</p>
+      <div class="chips">
+        {% for kw in recruiter_suggestions %}
+          <span class="chip">{{ kw.keyword }}</span>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+  <section class="card">
+    <h2>تقديم سريع / Easy Apply</h2>
+    <p>أرسل سيرتك الذاتية المخزّنة في التخزين المشفّر أو استخدم مولد السيرة الذاتية المدمج.</p>
+    <form>
+      <label>رابط ملف السيرة الذاتية (Object Storage URI)</label>
+      <input type="url" name="resume_object_uri" placeholder="s3://bucket/path-to-cv" />
+      <label>ملاحظات / Cover letter</label>
+      <textarea name="cover_letter"></textarea>
+      <button type="submit">تقديم / Submit</button>
+    </form>
+  </section>
+{% else %}
+  <p>لم يتم العثور على الفرصة.</p>
+{% endif %}
+{% endblock %}
