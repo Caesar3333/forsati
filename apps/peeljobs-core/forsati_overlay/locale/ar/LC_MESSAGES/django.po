@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ar\n"
+
+# Placeholder translations for Forsati overlay
+msgid "Job"
+msgstr "وظيفة"
+
+msgid "Internship"
+msgstr "تدريب"
+
+msgid "Volunteering"
+msgstr "تطوع"
+
+msgid "Scholarship"
+msgstr "منحة"
+
+msgid "Freelance"
+msgstr "عمل حر"
+
+msgid "Arabic"
+msgstr "العربية"
+
+msgid "English"
+msgstr "الإنجليزية"
+
+msgid "Opportunity"
+msgstr "فرصة"
+
+msgid "Opportunities"
+msgstr "الفرص"
+
+msgid "Opportunity application"
+msgstr "طلب فرصة"
+
+msgid "Opportunity applications"
+msgstr "طلبات الفرص"
+
+msgid "Application attachment"
+msgstr "مرفق الطلب"
+
+msgid "Application attachments"
+msgstr "مرفقات الطلب"
