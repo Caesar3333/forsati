@@ -1,0 +1,6 @@
+body.layout-rtl {
+  font-family: "Cairo", "Noto Sans Arabic", system-ui, sans-serif;
+}
+.lang-switch select {
+  direction: rtl;
+}

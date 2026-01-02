@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ language_code }}" dir="{{ text_direction }}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block page_title %}Forsati{% endblock %}</title>
+  {% block meta %}{% endblock %}
+  <link rel="stylesheet" href="{% static 'forsati/css/base.css' %}" />
+  {% if is_rtl %}
+  <link rel="stylesheet" href="{% static 'forsati/css/rtl.css' %}" />
+  {% endif %}
+</head>
+<body class="layout-{{ text_direction }}">
+  <header class="forsati-header">
+    <div class="container">
+      <div class="brand">فرصتي | Forsati</div>
+      <nav class="lang-switch">
+        <form action="{% url 'forsati-language-switch' %}" method="post">
+          {% csrf_token %}
+          <select name="language" onchange="this.form.submit()">
+            <option value="ar" {% if language_code|default:'ar' == 'ar' %}selected{% endif %}>العربية</option>
+            <option value="en" {% if language_code == 'en' %}selected{% endif %}>English</option>
+          </select>
+        </form>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="container small text-muted">
+    © فرصتي 2024 – Arabic-first opportunity marketplace.
+  </footer>
+</body>
+</html>
