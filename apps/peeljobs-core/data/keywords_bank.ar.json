@@ -1,0 +1,86 @@
+{
+  "country": "JO",
+  "language": "ar",
+  "packs": [
+    {
+      "name": "مهارات أساسية",
+      "tags": ["soft_skills", "core"],
+      "items": [
+        {"kw": "العمل ضمن فريق", "weight": 5, "syn": ["عمل جماعي", "روح الفريق"]},
+        {"kw": "إدارة الوقت", "weight": 5, "syn": ["تنظيم الوقت", "تحديد الأولويات"]},
+        {"kw": "حل المشكلات", "weight": 5, "syn": ["تحليل المشكلات", "حلول مبتكرة"]},
+        {"kw": "التفكير التحليلي", "weight": 4, "syn": ["تحليل البيانات", "منهجية"]},
+        {"kw": "مهارات التواصل", "weight": 5, "syn": ["تواصل فعال", "تواصل شفهي"]},
+        {"kw": "القيادة", "weight": 4, "syn": ["قيادة فرق", "توجيه"]},
+        {"kw": "الالتزام", "weight": 4, "syn": ["انضباط", "موثوقية"]},
+        {"kw": "المرونة", "weight": 3, "syn": ["التكيف", "الاستجابة للتغيير"]}
+      ]
+    },
+    {
+      "name": "إداري وموارد بشرية",
+      "tags": ["admin", "hr", "office"],
+      "items": [
+        {"kw": "شؤون الموظفين", "weight": 5, "syn": ["إدارة الموظفين"]},
+        {"kw": "إدارة الموارد البشرية", "weight": 5, "syn": ["سياسات الموارد البشرية", "HR"]},
+        {"kw": "التوظيف والاختيار", "weight": 4, "syn": ["استقطاب", "مقابلات"]},
+        {"kw": "إعداد الرواتب", "weight": 4, "syn": ["كشوف الرواتب", "Payroll"]},
+        {"kw": "قوانين العمل الأردنية", "weight": 5, "syn": ["قانون العمل", "تشريعات العمل"]},
+        {"kw": "تقييم الأداء", "weight": 4, "syn": ["مؤشرات أداء", "KPIs"]}
+      ]
+    },
+    {
+      "name": "تقنية المعلومات",
+      "tags": ["it", "software", "data"],
+      "items": [
+        {"kw": "تطوير البرمجيات", "weight": 5, "syn": ["برمجة", "Software Development"]},
+        {"kw": "قواعد البيانات", "weight": 4, "syn": ["SQL", "نمذجة البيانات"]},
+        {"kw": "أمن المعلومات", "weight": 5, "syn": ["سيبراني", "Cybersecurity"]},
+        {"kw": "الذكاء الاصطناعي", "weight": 4, "syn": ["تعلم الآلة", "Machine Learning"]},
+        {"kw": "تحليل البيانات", "weight": 4, "syn": ["Data Analytics", "تقارير"]},
+        {"kw": "الشبكات", "weight": 3, "syn": ["بنى تحتية", "Network"]}
+      ]
+    },
+    {
+      "name": "ضيافة وسياحة",
+      "tags": ["hospitality", "tourism"],
+      "items": [
+        {"kw": "فنادق", "weight": 4, "syn": ["خدمة غرف", "Hotel"]},
+        {"kw": "مطاعم", "weight": 4, "syn": ["خدمة طعام", "Food Service"]},
+        {"kw": "خدمة العملاء", "weight": 5, "syn": ["استقبال", "Customer Service"]},
+        {"kw": "إدارة الحجوزات", "weight": 4, "syn": ["حجوزات", "Reservations"]},
+        {"kw": "الإشراف الميداني", "weight": 3, "syn": ["Supervision", "مشرف"]}
+      ]
+    },
+    {
+      "name": "قطاع صحي",
+      "tags": ["health", "medical"],
+      "items": [
+        {"kw": "تمريض", "weight": 5, "syn": ["ممرض", "Nursing"]},
+        {"kw": "مختبرات", "weight": 4, "syn": ["تحاليل طبية", "Laboratory"]},
+        {"kw": "سجلات طبية", "weight": 4, "syn": ["ملفات المرضى", "Medical Records"]},
+        {"kw": "إدارة مستشفيات", "weight": 4, "syn": ["Hospital Management", "إدارة صحية"]},
+        {"kw": "سلامة المرضى", "weight": 5, "syn": ["Patient Safety", "جودة طبية"]}
+      ]
+    },
+    {
+      "name": "تعليم وتدريب",
+      "tags": ["education", "training"],
+      "items": [
+        {"kw": "تعليم", "weight": 5, "syn": ["تدريس", "Teaching"]},
+        {"kw": "تدريب مهني", "weight": 4, "syn": ["Vocational Training", "تمكين"]},
+        {"kw": "تطوير مناهج", "weight": 4, "syn": ["تصميم مناهج", "Curriculum"]},
+        {"kw": "إرشاد أكاديمي", "weight": 3, "syn": ["Academic Advising", "إرشاد"]}
+      ]
+    },
+    {
+      "name": "أعمال حرة ومشاريع",
+      "tags": ["freelance", "projects"],
+      "items": [
+        {"kw": "عمل حر", "weight": 4, "syn": ["فريلانسر", "Freelance"]},
+        {"kw": "إدارة مشاريع", "weight": 5, "syn": ["PM", "Project Management"]},
+        {"kw": "اتفاقيات عمل", "weight": 3, "syn": ["Contracts", "اتفاق"]},
+        {"kw": "فواتير", "weight": 3, "syn": ["Invoicing", "مطالبات"]}
+      ]
+    }
+  ]
+}

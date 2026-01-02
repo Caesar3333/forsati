@@ -1,0 +1,24 @@
+{% extends "forsati/layout/base.html" %}
+{% block page_title %}{{ meta_title }}{% endblock %}
+{% block meta %}
+  <meta name="description" content="{{ meta_description }}" />
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {% for lang, href in hreflang_urls.items %}
+    <link rel="alternate" href="{{ href }}" hreflang="{{ lang }}" />
+  {% endfor %}
+{% endblock %}
+{% block content %}
+<h1 class="page-title">الفرص المتاحة / Available Opportunities</h1>
+<ul class="opportunity-list">
+  {% for opportunity in opportunities %}
+    <li class="card">
+      <h2><a href="{% url 'forsati-opportunity-detail' slug=opportunity.slug %}">{{ opportunity.title }}</a></h2>
+      <p class="org">{{ opportunity.organization_name }} — {{ opportunity.get_type_display }}</p>
+      <p class="meta">{{ opportunity.location }}{% if opportunity.is_remote %} · Remote{% endif %}</p>
+      <p class="excerpt">{{ opportunity.description|truncatewords:30 }}</p>
+    </li>
+  {% empty %}
+    <li>لا توجد فرص منشورة حاليًا.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
