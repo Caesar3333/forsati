@@ -1,0 +1,42 @@
+{
+  "country": "JO",
+  "language": "ar",
+  "packs": [
+    {
+      "name": "مهارات أساسية",
+      "tags": ["core", "soft"],
+      "items": [
+        {
+          "kw": "مهارات التواصل",
+          "weight": 5,
+          "syn": ["التواصل الكتابي", "التواصل الشفهي"],
+          "tags": ["soft"]
+        },
+        {
+          "kw": "العمل الجماعي",
+          "weight": 4,
+          "syn": ["التعاون"],
+          "tags": ["soft"]
+        }
+      ]
+    },
+    {
+      "name": "مهارات تقنية",
+      "tags": ["tech"],
+      "items": [
+        {
+          "kw": "بايثون",
+          "weight": 5,
+          "syn": ["Python"],
+          "tags": ["tech"]
+        },
+        {
+          "kw": "جانغو",
+          "weight": 4,
+          "syn": ["Django"],
+          "tags": ["tech"]
+        }
+      ]
+    }
+  ]
+}

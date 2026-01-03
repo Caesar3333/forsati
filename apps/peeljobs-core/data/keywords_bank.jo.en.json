@@ -1,0 +1,42 @@
+{
+  "country": "JO",
+  "language": "en",
+  "packs": [
+    {
+      "name": "Core Skills",
+      "tags": ["core", "soft"],
+      "items": [
+        {
+          "kw": "Communication",
+          "weight": 5,
+          "syn": ["Written communication", "Verbal communication"],
+          "tags": ["soft"]
+        },
+        {
+          "kw": "Teamwork",
+          "weight": 4,
+          "syn": ["Collaboration"],
+          "tags": ["soft"]
+        }
+      ]
+    },
+    {
+      "name": "Technical",
+      "tags": ["tech"],
+      "items": [
+        {
+          "kw": "Python",
+          "weight": 5,
+          "syn": ["Python 3"],
+          "tags": ["tech"]
+        },
+        {
+          "kw": "Django",
+          "weight": 4,
+          "syn": ["Django REST"],
+          "tags": ["tech"]
+        }
+      ]
+    }
+  ]
+}
