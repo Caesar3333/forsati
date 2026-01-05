@@ -1,0 +1,456 @@
+{
+  "permissions": [
+    {
+      "key": "user.read",
+      "description": "View user profiles and status",
+      "scopes": ["platform", "organization", "self"]
+    },
+    {
+      "key": "user.update",
+      "description": "Update user profiles and status",
+      "scopes": ["platform", "organization", "self"]
+    },
+    {
+      "key": "user.suspend",
+      "description": "Suspend or ban users",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "user.verify",
+      "description": "Verify user identity or documents",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "org.read",
+      "description": "View organization accounts",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "org.update",
+      "description": "Update organization settings",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "org.suspend",
+      "description": "Suspend organization accounts",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "role.create",
+      "description": "Create new roles",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "role.update",
+      "description": "Update existing roles",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "role.assign",
+      "description": "Assign roles to users",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "permission.update",
+      "description": "Update role permissions",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "opp.read",
+      "description": "Read opportunities",
+      "scopes": ["platform", "organization", "self"]
+    },
+    {
+      "key": "opp.create",
+      "description": "Create opportunities",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "opp.update",
+      "description": "Update opportunities",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "opp.publish",
+      "description": "Publish opportunities",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "opp.unpublish",
+      "description": "Unpublish opportunities",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "opp.delete",
+      "description": "Delete opportunities",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "opp.moderate",
+      "description": "Approve or reject opportunities",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "app.read",
+      "description": "Read applications",
+      "scopes": ["platform", "organization", "self"]
+    },
+    {
+      "key": "app.submit",
+      "description": "Submit applications",
+      "scopes": ["self"]
+    },
+    {
+      "key": "app.export",
+      "description": "Export application data",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "app.move_stage",
+      "description": "Move applications through pipeline stages",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "app.comment",
+      "description": "Comment on applications",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "app.reject",
+      "description": "Reject applications",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "app.accept",
+      "description": "Accept applications",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "service.create",
+      "description": "Create marketplace services",
+      "scopes": ["marketplace_provider"]
+    },
+    {
+      "key": "service.update",
+      "description": "Update marketplace services",
+      "scopes": ["marketplace_provider"]
+    },
+    {
+      "key": "service.publish",
+      "description": "Publish marketplace services",
+      "scopes": ["marketplace_provider"]
+    },
+    {
+      "key": "provider.approve",
+      "description": "Approve marketplace providers",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "provider.suspend",
+      "description": "Suspend marketplace providers",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "order.read",
+      "description": "Read marketplace orders",
+      "scopes": ["platform", "marketplace_provider"]
+    },
+    {
+      "key": "order.refund",
+      "description": "Refund marketplace orders",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "payout.manage",
+      "description": "Manage provider payouts",
+      "scopes": ["platform", "marketplace_provider"]
+    },
+    {
+      "key": "program.create",
+      "description": "Create training programs",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "cohort.manage",
+      "description": "Manage program cohorts",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "enrollment.manage",
+      "description": "Manage enrollments",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "attendance.manage",
+      "description": "Manage attendance",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "certificate.issue",
+      "description": "Issue completion certificates",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "plan.manage",
+      "description": "Manage billing plans",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "subscription.manage",
+      "description": "Manage subscriptions",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "invoice.read",
+      "description": "Read invoices",
+      "scopes": ["platform", "organization", "self"]
+    },
+    {
+      "key": "refund.manage",
+      "description": "Manage refunds",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "coupon.manage",
+      "description": "Manage coupons",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "blog.manage",
+      "description": "Manage blog content",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "faq.manage",
+      "description": "Manage FAQ content",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "pages.manage",
+      "description": "Manage static pages",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "ticket.manage",
+      "description": "Manage support tickets",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "ticket.assign",
+      "description": "Assign support tickets",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "ticket.close",
+      "description": "Close support tickets",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "audit.read",
+      "description": "Read audit logs",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "audit.export",
+      "description": "Export audit logs",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "report.read",
+      "description": "Read reports and analytics",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "report.export",
+      "description": "Export reports and analytics",
+      "scopes": ["platform", "organization"]
+    },
+    {
+      "key": "settings.manage",
+      "description": "Manage system settings",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.notifications",
+      "description": "Manage notification settings",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.seo",
+      "description": "Manage SEO settings",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.payments",
+      "description": "Manage payment gateways",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.language",
+      "description": "Manage language settings",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.extensions",
+      "description": "Manage extensions",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.maintenance",
+      "description": "Manage maintenance mode",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.gdpr",
+      "description": "Manage GDPR and cookie settings",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.sitemap",
+      "description": "Manage sitemap",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.robots",
+      "description": "Manage robots.txt",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.custom_css",
+      "description": "Manage custom CSS",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "settings.frontend",
+      "description": "Manage frontend content",
+      "scopes": ["platform"]
+    },
+    {
+      "key": "profile.update",
+      "description": "Update own profile",
+      "scopes": ["self"]
+    }
+  ],
+  "groups": [
+    {
+      "key": "users",
+      "label": "Users",
+      "permissions": ["user.read", "user.update", "user.suspend", "user.verify"]
+    },
+    {
+      "key": "organizations",
+      "label": "Organizations",
+      "permissions": ["org.read", "org.update", "org.suspend"]
+    },
+    {
+      "key": "roles",
+      "label": "Roles",
+      "permissions": ["role.create", "role.update", "role.assign", "permission.update"]
+    },
+    {
+      "key": "opportunities",
+      "label": "Opportunities",
+      "permissions": [
+        "opp.read",
+        "opp.create",
+        "opp.update",
+        "opp.publish",
+        "opp.unpublish",
+        "opp.delete",
+        "opp.moderate"
+      ]
+    },
+    {
+      "key": "applications",
+      "label": "Applications",
+      "permissions": [
+        "app.read",
+        "app.submit",
+        "app.export",
+        "app.move_stage",
+        "app.comment",
+        "app.reject",
+        "app.accept"
+      ]
+    },
+    {
+      "key": "marketplace",
+      "label": "Marketplace",
+      "permissions": [
+        "service.create",
+        "service.update",
+        "service.publish",
+        "provider.approve",
+        "provider.suspend",
+        "order.read",
+        "order.refund",
+        "payout.manage"
+      ]
+    },
+    {
+      "key": "programs",
+      "label": "Programs",
+      "permissions": [
+        "program.create",
+        "cohort.manage",
+        "enrollment.manage",
+        "attendance.manage",
+        "certificate.issue"
+      ]
+    },
+    {
+      "key": "billing",
+      "label": "Billing",
+      "permissions": [
+        "plan.manage",
+        "subscription.manage",
+        "invoice.read",
+        "refund.manage",
+        "coupon.manage"
+      ]
+    },
+    {
+      "key": "content",
+      "label": "Content",
+      "permissions": ["blog.manage", "faq.manage", "pages.manage"]
+    },
+    {
+      "key": "support",
+      "label": "Support",
+      "permissions": ["ticket.manage", "ticket.assign", "ticket.close"]
+    },
+    {
+      "key": "audit",
+      "label": "Audit",
+      "permissions": ["audit.read", "audit.export"]
+    },
+    {
+      "key": "reports",
+      "label": "Reports",
+      "permissions": ["report.read", "report.export"]
+    },
+    {
+      "key": "settings",
+      "label": "Settings",
+      "permissions": [
+        "settings.manage",
+        "settings.notifications",
+        "settings.seo",
+        "settings.payments",
+        "settings.language",
+        "settings.extensions",
+        "settings.maintenance",
+        "settings.gdpr",
+        "settings.sitemap",
+        "settings.robots",
+        "settings.custom_css",
+        "settings.frontend"
+      ]
+    },
+    {
+      "key": "profile",
+      "label": "Profile",
+      "permissions": ["profile.update"]
+    }
+  ]
+}

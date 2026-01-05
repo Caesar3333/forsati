@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "jobs": "Jobs",
+    "companies": "Companies",
+    "ai": "AI Tools",
+    "recruiter": "Recruiter Hub",
+    "login": "Sign In",
+    "register": "Create Account",
+    "profile": "My Profile"
+  },
+  "actions": {
+    "search": "Search",
+    "apply": "Apply Now",
+    "save": "Save",
+    "view": "View Details",
+    "start": "Get Started",
+    "createJob": "Post a Job"
+  },
+  "footer": {
+    "about": "About Forsati",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy",
+    "security": "Security",
+    "aiDisclaimer": "AI Disclaimer",
+    "contact": "Contact",
+    "copyright": "© All rights reserved for Forsati"
+  },
+  "hero": {
+    "title": "Find the opportunity that fits you",
+    "subtitle": "An Arabic-first platform for jobs, training, volunteering, and grants, enhanced by AI tools for CVs and interviews.",
+    "primaryCta": "Start searching",
+    "secondaryCta": "Build your AI CV"
+  },
+  "common": {
+    "demoMode": "Demo Mode",
+    "demoModeDesc": "Showing demo data until APIs are connected."
+  }
+}

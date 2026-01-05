@@ -1,0 +1,57 @@
+"use client";
+
+import Link from "next/link";
+import { Mail, Phone } from "lucide-react";
+import { useLanguage, useTranslations } from "@/components/i18n/LanguageProvider";
+import { Logo } from "@/components/shared/Logo";
+
+export function Footer() {
+  const { lang } = useLanguage();
+  const t = useTranslations();
+
+  return (
+    <footer className="border-t border-ink-100 bg-white">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-3 lg:px-8">
+        <div className="space-y-4">
+          <Logo />
+          <p className="text-sm text-ink-500">
+            {lang === "ar"
+              ? "مساحة واحدة تجمع الباحثين عن الفرص وأصحاب العمل مع أدوات ذكية ودعم عربي كامل."
+              : "A single hub for job seekers and employers with smart tools and Arabic-first support."}
+          </p>
+        </div>
+        <div className="space-y-2 text-sm text-ink-600">
+          <div className="font-semibold text-ink-900">
+            {lang === "ar" ? "روابط سريعة" : "Quick Links"}
+          </div>
+          <Link href={`/${lang}/about`} className="block hover:text-brand-600">
+            {t("footer.about")}
+          </Link>
+          <Link href={`/${lang}/privacy`} className="block hover:text-brand-600">
+            {t("footer.privacy")}
+          </Link>
+          <Link href={`/${lang}/terms`} className="block hover:text-brand-600">
+            {t("footer.terms")}
+          </Link>
+          <Link href={`/${lang}/ai-disclaimer`} className="block hover:text-brand-600">
+            {t("footer.aiDisclaimer")}
+          </Link>
+        </div>
+        <div className="space-y-2 text-sm text-ink-600">
+          <div className="font-semibold text-ink-900">{t("footer.contact")}</div>
+          <div className="flex items-center gap-2">
+            <Mail className="h-4 w-4 text-brand-500" />
+            support@forsati.example
+          </div>
+          <div className="flex items-center gap-2">
+            <Phone className="h-4 w-4 text-brand-500" />
+            +966 000 000 000
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-ink-100 py-4 text-center text-xs text-ink-400">
+        {t("footer.copyright")}
+      </div>
+    </footer>
+  );
+}
