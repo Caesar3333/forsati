@@ -1,9 +1,13 @@
 {
   "nav": {
-    "jobs": "Jobs",
+    "jobs": "Opportunities",
     "companies": "Companies",
     "ai": "AI Tools",
     "recruiter": "Recruiter Hub",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "contact": "Contact",
     "login": "Sign In",
     "register": "Create Account",
     "profile": "My Profile"
@@ -24,7 +28,13 @@
     "security": "Security",
     "aiDisclaimer": "AI Disclaimer",
     "contact": "Contact",
-    "copyright": "© All rights reserved for Forsati"
+    "copyright": "All rights reserved for Forsati",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "tagline": "An Arabic-first hub for opportunities, applications, and smart career tools.",
+    "links": "Quick Links",
+    "legal": "Legal"
   },
   "hero": {
     "title": "Find the opportunity that fits you",
@@ -35,5 +45,10 @@
   "common": {
     "demoMode": "Demo Mode",
     "demoModeDesc": "Showing demo data until APIs are connected."
+  },
+  "brand": {
+    "nameEn": "Forsati",
+    "nameAr": "\u0641\u0631\u0635\u062a\u064a",
+    "logoAlt": "Forsati logo"
   }
 }

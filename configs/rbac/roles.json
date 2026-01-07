@@ -1,17 +1,23 @@
 {
   "roles": [
     {
-      "key": "admin_owner",
-      "label": "Admin Owner",
+      "key": "owner",
+      "label": "Owner",
       "description": "Full system control with editable roles and permissions",
-      "default_scopes": ["platform"],
-      "permissions": ["*"]
+      "default_scopes": [
+        "platform"
+      ],
+      "permissions": [
+        "*"
+      ]
     },
     {
-      "key": "super_admin",
-      "label": "Super Admin",
+      "key": "admin",
+      "label": "Admin",
       "description": "Full platform operations except owner-only controls",
-      "default_scopes": ["platform"],
+      "default_scopes": [
+        "platform"
+      ],
       "permissions": [
         "user.read",
         "user.update",
@@ -78,21 +84,38 @@
       "key": "moderator",
       "label": "Moderator",
       "description": "Moderates content and reported activity",
-      "default_scopes": ["platform"],
-      "permissions": ["opp.moderate", "app.read", "app.comment", "user.read", "ticket.manage", "report.read"]
+      "default_scopes": [
+        "platform"
+      ],
+      "permissions": [
+        "opp.moderate",
+        "app.read",
+        "app.comment",
+        "user.read",
+        "ticket.manage",
+        "report.read"
+      ]
     },
     {
       "key": "publisher",
       "label": "Publisher",
       "description": "Manages platform content",
-      "default_scopes": ["platform"],
-      "permissions": ["blog.manage", "faq.manage", "pages.manage"]
+      "default_scopes": [
+        "platform"
+      ],
+      "permissions": [
+        "blog.manage",
+        "faq.manage",
+        "pages.manage"
+      ]
     },
     {
-      "key": "finance_admin",
-      "label": "Finance Admin",
+      "key": "finance",
+      "label": "Finance",
       "description": "Manages billing, invoices, and refunds",
-      "default_scopes": ["platform"],
+      "default_scopes": [
+        "platform"
+      ],
       "permissions": [
         "plan.manage",
         "subscription.manage",
@@ -105,31 +128,26 @@
       ]
     },
     {
-      "key": "support_agent",
-      "label": "Support Agent",
+      "key": "support",
+      "label": "Support",
       "description": "Handles support tickets and user inquiries",
-      "default_scopes": ["platform"],
-      "permissions": ["ticket.manage", "ticket.assign", "ticket.close", "user.read"]
-    },
-    {
-      "key": "marketplace_provider",
-      "label": "Marketplace Provider",
-      "description": "Publishes services and manages orders",
-      "default_scopes": ["marketplace_provider", "self"],
+      "default_scopes": [
+        "platform"
+      ],
       "permissions": [
-        "service.create",
-        "service.update",
-        "service.publish",
-        "order.read",
-        "payout.manage",
-        "profile.update"
+        "ticket.manage",
+        "ticket.assign",
+        "ticket.close",
+        "user.read"
       ]
     },
     {
-      "key": "organization_owner",
+      "key": "org_owner",
       "label": "Organization Owner",
       "description": "Owns organization and manages hiring operations",
-      "default_scopes": ["organization"],
+      "default_scopes": [
+        "organization"
+      ],
       "permissions": [
         "org.read",
         "org.update",
@@ -153,7 +171,9 @@
       "key": "hr_manager",
       "label": "HR Manager",
       "description": "Manages applicants and hiring pipelines",
-      "default_scopes": ["organization"],
+      "default_scopes": [
+        "organization"
+      ],
       "permissions": [
         "opp.read",
         "opp.create",
@@ -170,36 +190,107 @@
       "key": "recruiter",
       "label": "Recruiter",
       "description": "Sources candidates and manages applications",
-      "default_scopes": ["organization"],
-      "permissions": ["opp.read", "app.read", "app.move_stage", "app.comment"]
+      "default_scopes": [
+        "organization"
+      ],
+      "permissions": [
+        "opp.read",
+        "app.read",
+        "app.move_stage",
+        "app.comment"
+      ]
     },
     {
       "key": "interviewer",
       "label": "Interviewer",
       "description": "Evaluates candidates during interviews",
-      "default_scopes": ["organization"],
-      "permissions": ["app.read", "app.comment"]
+      "default_scopes": [
+        "organization"
+      ],
+      "permissions": [
+        "app.read",
+        "app.comment"
+      ]
     },
     {
       "key": "opportunity_manager",
       "label": "Opportunity Manager",
       "description": "Manages volunteer, scholarship, and program opportunities",
-      "default_scopes": ["organization"],
-      "permissions": ["opp.read", "opp.create", "opp.update", "opp.publish", "opp.unpublish"]
+      "default_scopes": [
+        "organization"
+      ],
+      "permissions": [
+        "opp.read",
+        "opp.create",
+        "opp.update",
+        "opp.publish",
+        "opp.unpublish"
+      ]
+    },
+    {
+      "key": "provider_coach",
+      "label": "Provider Coach",
+      "description": "Publishes coaching services and manages orders",
+      "default_scopes": [
+        "marketplace_provider",
+        "self"
+      ],
+      "permissions": [
+        "service.create",
+        "service.update",
+        "service.publish",
+        "order.read",
+        "payout.manage",
+        "profile.update"
+      ]
+    },
+    {
+      "key": "provider_reviewer",
+      "label": "Provider Reviewer",
+      "description": "Publishes review services and manages orders",
+      "default_scopes": [
+        "marketplace_provider",
+        "self"
+      ],
+      "permissions": [
+        "service.create",
+        "service.update",
+        "service.publish",
+        "order.read",
+        "payout.manage",
+        "profile.update"
+      ]
+    },
+    {
+      "key": "provider_training",
+      "label": "Provider Training",
+      "description": "Publishes training services and manages orders",
+      "default_scopes": [
+        "marketplace_provider",
+        "self"
+      ],
+      "permissions": [
+        "service.create",
+        "service.update",
+        "service.publish",
+        "order.read",
+        "payout.manage",
+        "profile.update"
+      ]
     },
     {
       "key": "job_seeker",
       "label": "Job Seeker",
       "description": "Finds and applies to opportunities",
-      "default_scopes": ["self"],
-      "permissions": ["profile.update", "app.submit", "app.read"]
-    },
-    {
-      "key": "volunteer_applicant",
-      "label": "Volunteer/Scholarship Applicant",
-      "description": "Applies to volunteer and scholarship opportunities",
-      "default_scopes": ["self"],
-      "permissions": ["profile.update", "app.submit", "app.read"]
+      "default_scopes": [
+        "self"
+      ],
+      "permissions": [
+        "profile.update",
+        "app.submit",
+        "app.read",
+        "opp.read"
+      ]
     }
   ]
 }

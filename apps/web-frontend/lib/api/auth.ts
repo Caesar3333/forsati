@@ -23,3 +23,25 @@ export async function forgotPassword(payload: { email: string }) {
     ok: true
   }));
 }
+
+export async function resetPassword(payload: {
+  email: string;
+  code: string;
+  password: string;
+}) {
+  return apiPost("/auth/reset-password", payload, () => ({
+    ok: true
+  }));
+}
+
+export async function verifyEmail(payload: { code: string }) {
+  return apiPost("/auth/verify-email", payload, () => ({
+    ok: true
+  }));
+}
+
+export async function verifyMobile(payload: { code: string }) {
+  return apiPost("/auth/verify-mobile", payload, () => ({
+    ok: true
+  }));
+}

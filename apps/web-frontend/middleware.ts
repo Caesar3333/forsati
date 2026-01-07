@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
   const locale = prefersEn ? "en" : "ar";
   const url = request.nextUrl.clone();
   url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(url);
+  return NextResponse.rewrite(url);
 }
 
 export const config = {

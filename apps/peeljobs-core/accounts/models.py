@@ -27,15 +27,27 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
-        extra_fields.setdefault("role", "admin")
+        extra_fields.setdefault("role", "owner")
         return self._create_user(email, password, **extra_fields)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
     ROLE_CHOICES = [
-        ("job_seeker", "Job seeker"),
-        ("recruiter", "Recruiter"),
+        ("owner", "Owner"),
         ("admin", "Admin"),
+        ("moderator", "Moderator"),
+        ("publisher", "Publisher"),
+        ("finance", "Finance"),
+        ("support", "Support"),
+        ("org_owner", "Organization owner"),
+        ("hr_manager", "HR manager"),
+        ("recruiter", "Recruiter"),
+        ("interviewer", "Interviewer"),
+        ("opportunity_manager", "Opportunity manager"),
+        ("provider_coach", "Provider coach"),
+        ("provider_reviewer", "Provider reviewer"),
+        ("provider_training", "Provider training"),
+        ("job_seeker", "Job seeker"),
     ]
 
     STATUS_CHOICES = [

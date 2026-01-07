@@ -93,10 +93,10 @@ export function LoginForm() {
         </Button>
       </form>
       <div className="mt-4 flex items-center justify-between text-sm text-ink-500">
-        <Link href={`/${lang}/forgot-password`} className="text-brand-600">
+        <Link href={`/${lang}/auth/forgot-password`} className="text-brand-600">
           {isAr ? "نسيت كلمة المرور؟" : "Forgot password?"}
         </Link>
-        <Link href={`/${lang}/register`} className="text-brand-600">
+        <Link href={`/${lang}/auth/register`} className="text-brand-600">
           {isAr ? "إنشاء حساب" : "Create account"}
         </Link>
       </div>

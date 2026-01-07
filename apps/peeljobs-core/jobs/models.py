@@ -7,9 +7,9 @@ class Opportunity(models.Model):
     TYPE_CHOICES = [
         ("job", "Job"),
         ("internship", "Internship"),
-        ("graduate_training", "Graduate training"),
-        ("volunteering", "Volunteering"),
+        ("volunteer", "Volunteer"),
         ("scholarship", "Scholarship"),
+        ("program", "Program"),
         ("freelance", "Freelance"),
     ]
 
@@ -23,6 +23,12 @@ class Opportunity(models.Model):
         ("draft", "Draft"),
         ("published", "Published"),
         ("archived", "Archived"),
+    ]
+
+    MODERATION_CHOICES = [
+        ("pending", "Pending"),
+        ("approved", "Approved"),
+        ("rejected", "Rejected"),
     ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -49,7 +55,10 @@ class Opportunity(models.Model):
     domain = models.CharField(max_length=255, blank=True)
     keywords_json = models.JSONField(default=list, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="draft")
+    moderation_status = models.CharField(max_length=20, choices=MODERATION_CHOICES, default="pending")
+    moderation_notes = models.TextField(blank=True)
     published_at = models.DateTimeField(null=True, blank=True)
+    program_is_paid = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -62,3 +71,26 @@ class Opportunity(models.Model):
 
     def __str__(self) -> str:
         return self.title_en or self.title_ar or str(self.id)
+
+
+class SavedOpportunity(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.CASCADE,
+        related_name="saved_opportunities",
+    )
+    opportunity = models.ForeignKey(
+        Opportunity,
+        on_delete=models.CASCADE,
+        related_name="saved_by",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "saved_opportunities"
+        unique_together = ("user", "opportunity")
+        ordering = ["-created_at"]
+
+    def __str__(self) -> str:
+        return f"SavedOpportunity({self.user_id}, {self.opportunity_id})"

@@ -20,6 +20,7 @@ class EmbeddingBase(models.Model):
     model_name = models.CharField(max_length=100, default="unknown")
     source_type = models.CharField(max_length=50, default="user_content")
     metadata_json = models.JSONField(default=dict, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:

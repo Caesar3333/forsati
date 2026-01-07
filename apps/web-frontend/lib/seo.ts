@@ -277,7 +277,168 @@ const meta: Record<string, Record<Locale, MetaEntry>> = {
       title: "AI disclaimer",
       description: "Details on how AI services are used."
     }
+  },
+  adminDashboard: {
+    ar: {
+      title: "لوحة تحكم الإدارة",
+      description: "نظرة شاملة على مؤشرات النظام والقرارات العاجلة."
+    },
+    en: {
+      title: "Admin dashboard",
+      description: "System KPIs, approvals, and operational insights."
+    }
+  },
+  adminSettings: {
+    ar: {
+      title: "إعدادات النظام",
+      description: "إدارة إعدادات النظام والهوية والتنبيهات."
+    },
+    en: {
+      title: "System settings",
+      description: "Manage system configuration, branding, and notifications."
+    }
+  },
+  adminUsers: {
+    ar: {
+      title: "إدارة المستخدمين",
+      description: "عرض المستخدمين وتحديث صلاحياتهم."
+    },
+    en: {
+      title: "Manage users",
+      description: "Review users and update roles."
+    }
+  },
+  adminPayments: {
+    ar: {
+      title: "إدارة المدفوعات",
+      description: "متابعة المدفوعات والبوابات."
+    },
+    en: {
+      title: "Payments management",
+      description: "Track payments and gateway status."
+    }
+  },
+  adminSupport: {
+    ar: {
+      title: "تذاكر الدعم",
+      description: "متابعة تذاكر الدعم والطلبات."
+    },
+    en: {
+      title: "Support tickets",
+      description: "Manage support tickets and requests."
+    }
+  },
+  adminReports: {
+    ar: {
+      title: "التقارير",
+      description: "لوحة تقارير وتحليلات النظام."
+    },
+    en: {
+      title: "Reports",
+      description: "System reports and analytics."
+    }
   }
+  ,pricing: {
+    ar: {
+      title: "خطط الأسعار",
+      description: "اختر الخطة المناسبة لرحلتك المهنية."
+    },
+    en: {
+      title: "Pricing plans",
+      description: "Choose the plan that fits your journey."
+    }
+  },
+  faq: {
+    ar: {
+      title: "الأسئلة الشائعة",
+      description: "إجابات على الأسئلة المتكررة حول فرصتي."
+    },
+    en: {
+      title: "FAQ",
+      description: "Answers to common questions about Forsati."
+    }
+  },
+  blog: {
+    ar: {
+      title: "مدونة فرصتي",
+      description: "مقالات عملية للنمو المهني."
+    },
+    en: {
+      title: "Forsati blog",
+      description: "Practical insights for job seekers and organizations."
+    }
+  },
+  contact: {
+    ar: {
+      title: "تواصل معنا",
+      description: "أرسل استفسارك وسنعود إليك قريباً."
+    },
+    en: {
+      title: "Contact us",
+      description: "Send a message and our team will reply."
+    }
+  },
+  legalTerms: {
+    ar: {
+      title: "الشروط والأحكام",
+      description: "تفاصيل الشروط التي تحكم استخدام فرصتي."
+    },
+    en: {
+      title: "Terms & Conditions",
+      description: "Terms that govern using Forsati."
+    }
+  },
+  legalPrivacy: {
+    ar: {
+      title: "سياسة الخصوصية",
+      description: "كيف نحمي بياناتك وخصوصيتك."
+    },
+    en: {
+      title: "Privacy Policy",
+      description: "How we handle and protect your data."
+    }
+  },
+  legalAiDisclaimer: {
+    ar: {
+      title: "إخلاء مسؤولية الذكاء الاصطناعي",
+      description: "توضيح حدود استخدام خدمات الذكاء الاصطناعي."
+    },
+    en: {
+      title: "AI Disclaimer",
+      description: "How AI is used on the platform."
+    }
+  },
+  resetPassword: {
+    ar: {
+      title: "تعيين كلمة مرور جديدة",
+      description: "أكمل إعادة تعيين كلمة المرور."
+    },
+    en: {
+      title: "Set a new password",
+      description: "Complete your password reset."
+    }
+  },
+  verifyEmail: {
+    ar: {
+      title: "تأكيد البريد الإلكتروني",
+      description: "أدخل رمز التحقق المرسل لبريدك."
+    },
+    en: {
+      title: "Verify email",
+      description: "Enter the code sent to your email."
+    }
+  },
+  verifyMobile: {
+    ar: {
+      title: "تأكيد رقم الجوال",
+      description: "أدخل رمز التحقق المرسل لهاتفك."
+    },
+    en: {
+      title: "Verify mobile",
+      description: "Enter the code sent to your phone."
+    }
+  }
+
 };
 
 type BuildMetadataArgs = {
@@ -295,7 +456,7 @@ export function buildMetadata({
   titleOverride,
   descriptionOverride
 }: BuildMetadataArgs): Metadata {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://forsati.example";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost";
   const entry = meta[key][lang];
   const title = titleOverride || entry.title;
   const description = descriptionOverride || entry.description;

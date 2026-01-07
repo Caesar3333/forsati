@@ -12,7 +12,10 @@ export function LanguageSwitch() {
   const nextLang = lang === "ar" ? "en" : "ar";
 
   const handleSwitch = () => {
-    const nextPath = pathname.replace(/^\/(ar|en)/, `/${nextLang}`);
+    const hasLocale = /^\/(ar|en)(\/|$)/.test(pathname);
+    const nextPath = hasLocale
+      ? pathname.replace(/^\/(ar|en)/, `/${nextLang}`)
+      : `/${nextLang}${pathname}`;
     const query = searchParams.toString();
     const withQuery = query ? `${nextPath}?${query}` : nextPath;
     router.push(withQuery.startsWith("/") ? withQuery : `/${nextLang}`);

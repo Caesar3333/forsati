@@ -37,7 +37,7 @@ export default function CheckEmailPage({
             ? "أرسلنا لك رسالة تحقق أو استعادة، يرجى متابعة التعليمات."
             : "We sent you an email with next steps."}
         </p>
-        <Link href={`/${params.lang}/login`} className="mt-5 inline-block">
+        <Link href={`/${params.lang}/auth/login`} className="mt-5 inline-block">
           <Button variant="outline">
             {isAr ? "العودة لتسجيل الدخول" : "Back to sign in"}
           </Button>

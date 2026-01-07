@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name="Opportunity",
             fields=[
                 ("id", models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, serialize=False)),
-                ("type", models.CharField(choices=[("job", "Job"), ("internship", "Internship"), ("graduate_training", "Graduate training"), ("volunteering", "Volunteering"), ("scholarship", "Scholarship"), ("freelance", "Freelance")], default="job", max_length=30)),
+                ("type", models.CharField(choices=[("job", "Job"), ("internship", "Internship"), ("volunteer", "Volunteer"), ("scholarship", "Scholarship"), ("program", "Program"), ("freelance", "Freelance")], default="job", max_length=30)),
                 ("title_ar", models.CharField(max_length=255, blank=True)),
                 ("title_en", models.CharField(max_length=255, blank=True)),
                 ("description_ar", models.TextField(blank=True)),
@@ -34,7 +34,10 @@ class Migration(migrations.Migration):
                 ("domain", models.CharField(max_length=255, blank=True)),
                 ("keywords_json", models.JSONField(default=list, blank=True)),
                 ("status", models.CharField(choices=[("draft", "Draft"), ("published", "Published"), ("archived", "Archived")], default="draft", max_length=20)),
+                ("moderation_status", models.CharField(choices=[("pending", "Pending"), ("approved", "Approved"), ("rejected", "Rejected")], default="pending", max_length=20)),
+                ("moderation_notes", models.TextField(blank=True)),
                 ("published_at", models.DateTimeField(blank=True, null=True)),
+                ("program_is_paid", models.BooleanField(default=False)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
                 ("organization", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name="opportunities", to="accounts.organizationprofile")),
@@ -43,6 +46,20 @@ class Migration(migrations.Migration):
                 "db_table": "opportunities",
                 "ordering": ["-created_at"],
                 "indexes": [models.Index(fields=["organization", "status", "published_at"], name="jobs_opport_organiz_3b92da_idx")],
+            },
+        ),
+        migrations.CreateModel(
+            name="SavedOpportunity",
+            fields=[
+                ("id", models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, serialize=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("opportunity", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name="saved_by", to="jobs.opportunity")),
+                ("user", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name="saved_opportunities", to="accounts.user")),
+            ],
+            options={
+                "db_table": "saved_opportunities",
+                "ordering": ["-created_at"],
+                "unique_together": {("user", "opportunity")},
             },
         ),
     ]

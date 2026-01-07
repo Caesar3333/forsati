@@ -5,7 +5,8 @@ import { useTranslations } from "@/components/i18n/LanguageProvider";
 
 export function DemoModeBanner({ show }: { show: boolean }) {
   const t = useTranslations();
-  if (!show) {
+  const isDev = process.env.NODE_ENV === "development";
+  if (!show || !isDev) {
     return null;
   }
 

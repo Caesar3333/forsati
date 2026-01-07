@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Sparkles } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useLanguage, useTranslations } from "@/components/i18n/LanguageProvider";
 import { Logo } from "@/components/shared/Logo";
 import { SearchBar } from "@/components/shared/SearchBar";
@@ -21,21 +21,17 @@ export function Header() {
             <Link href={`/${lang}/jobs`} className="hover:text-brand-600">
               {t("nav.jobs")}
             </Link>
-            <Link
-              href={`/${lang}/companies/demo`}
-              className="hover:text-brand-600"
-            >
-              {t("nav.companies")}
+            <Link href={`/${lang}/pricing`} className="hover:text-brand-600">
+              {t("nav.pricing")}
             </Link>
-            <Link href={`/${lang}/me/ai/cv-analyzer`} className="hover:text-brand-600">
-              {t("nav.ai")}
+            <Link href={`/${lang}/faq`} className="hover:text-brand-600">
+              {t("nav.faq")}
             </Link>
-            <Link
-              href={`/${lang}/recruiter/dashboard`}
-              className="flex items-center gap-1 text-ink-700 hover:text-brand-600"
-            >
-              <Sparkles className="h-4 w-4 text-brand-500" />
-              {t("nav.recruiter")}
+            <Link href={`/${lang}/blog`} className="hover:text-brand-600">
+              {t("nav.blog")}
+            </Link>
+            <Link href={`/${lang}/contact`} className="hover:text-brand-600">
+              {t("nav.contact")}
             </Link>
           </nav>
         </div>
@@ -44,12 +40,12 @@ export function Header() {
         </div>
         <div className="flex items-center gap-2">
           <LanguageSwitch />
-          <Link href={`/${lang}/login`}>
+          <Link href={`/${lang}/auth/login`}>
             <Button variant="ghost" size="sm">
               {t("nav.login")}
             </Button>
           </Link>
-          <Link href={`/${lang}/register`} className="hidden sm:block">
+          <Link href={`/${lang}/auth/register`} className="hidden sm:block">
             <Button size="sm">{t("nav.register")}</Button>
           </Link>
           <button className="rounded-full border border-ink-200 p-2 text-ink-600 lg:hidden">

@@ -1,8 +1,23 @@
 import re
 
-
 ARABIC_DIACRITICS = re.compile(r"[\u0617-\u061A\u064B-\u0652]")
 ARABIC_TATWEEL = re.compile(r"\u0640")
+ARABIC_TRANSLATION = str.maketrans(
+    {
+        "\u0623": "\u0627",  # ? -> ?
+        "\u0625": "\u0627",  # ? -> ?
+        "\u0622": "\u0627",  # ? -> ?
+        "\u0671": "\u0627",  # ? -> ?
+        "\u0649": "\u064a",  # ? -> ?
+        "\u0624": "\u0648",  # ? -> ?
+        "\u0626": "\u064a",  # ? -> ?
+        "\u0629": "\u0647",  # ? -> ?
+        "\ufefb": "\u0644\u0627",  # ? -> ??
+        "\ufef7": "\u0644\u0627",  # ? -> ??
+        "\ufef9": "\u0644\u0627",  # ? -> ??
+        "\ufef5": "\u0644\u0627",  # ? -> ??
+    }
+)
 
 
 def normalize_arabic(text: str) -> str:
@@ -11,9 +26,7 @@ def normalize_arabic(text: str) -> str:
     value = text.strip().lower()
     value = ARABIC_DIACRITICS.sub("", value)
     value = ARABIC_TATWEEL.sub("", value)
-    value = value.replace("أ", "ا").replace("إ", "ا").replace("آ", "ا")
-    value = value.replace("ة", "ه")
-    value = value.replace("ى", "ي")
+    value = value.translate(ARABIC_TRANSLATION)
     value = re.sub(r"\s+", " ", value)
     return value
 

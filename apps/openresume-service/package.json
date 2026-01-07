@@ -1,0 +1,10 @@
+{
+  "name": "forsati-openresume-stub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Forsati resume service stub",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

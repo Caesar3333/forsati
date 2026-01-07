@@ -5,18 +5,18 @@ from django.views.decorators.http import require_GET
 @require_GET
 def index(request):
     html = """<!doctype html>
-<html lang="en">
+<html lang=\"en\">
   <head>
-    <meta charset="utf-8">
+    <meta charset=\"utf-8\">
     <title>Forsati API</title>
   </head>
   <body>
     <h1>Forsati API</h1>
     <p>Django REST backend is running.</p>
     <ul>
-      <li><a href="/api/health">/api/health</a></li>
-      <li><a href="/api/ready">/api/ready</a></li>
-      <li><a href="/admin/">/admin/</a></li>
+      <li><a href=\"/api/health\">/api/health</a></li>
+      <li><a href=\"/api/ready\">/api/ready</a></li>
+      <li><a href=\"/admin/\">/admin/</a></li>
     </ul>
   </body>
 </html>
@@ -26,12 +26,12 @@ def index(request):
 
 @require_GET
 def health(request):
-    return JsonResponse({"status": "ok", "service": "peeljobs-core"})
+    return JsonResponse({"status": "ok", "service": "forsati-core"})
 
 
 @require_GET
 def ready(request):
-    return JsonResponse({"status": "ready", "service": "peeljobs-core"})
+    return JsonResponse({"status": "ready", "service": "forsati-core"})
 
 
 def _resolve_language(request):
@@ -47,7 +47,7 @@ PAGES = {
         },
         "ar": {
             "title": "عن فرصتي",
-            "body": "فرصتي منصة فرص عربية أولاً تربط المرشحين بجهات موثوقة بطريقة عادلة وسريعة.",
+            "body": "فرصتي منصة عربية تربط الباحثين عن الفرص بالجهات الموثوقة.",
         },
     },
     "privacy": {
@@ -57,7 +57,7 @@ PAGES = {
         },
         "ar": {
             "title": "سياسة الخصوصية",
-            "body": "نحفظ الحد الأدنى من البيانات اللازمة لتشغيل المنصة ولا نخزن ملفات الهوية داخل قاعدة البيانات.",
+            "body": "نحفظ الحد الأدنى من البيانات اللازمة لتشغيل المنصة ولا نخزن مستندات الهوية.",
         },
     },
     "cookies": {
@@ -67,7 +67,7 @@ PAGES = {
         },
         "ar": {
             "title": "سياسة ملفات تعريف الارتباط",
-            "body": "نستخدم ملفات تعريف ارتباط أساسية للحفاظ على الجلسات آمنة وتحسين التجربة.",
+            "body": "نستخدم ملفات تعريف ارتباط أساسية لأمان الجلسات وتحسين التجربة.",
         },
     },
     "terms": {
@@ -77,7 +77,7 @@ PAGES = {
         },
         "ar": {
             "title": "الشروط والأحكام",
-            "body": "باستخدام فرصتي أنت توافق على تقديم معلومات دقيقة واحترام سياسات المنصة.",
+            "body": "باستخدام فرصتي توافق على تقديم معلومات دقيقة والالتزام بإرشادات المنصة.",
         },
     },
     "security": {
@@ -86,8 +86,8 @@ PAGES = {
             "body": "Forsati applies encryption, access controls, and audit logging to protect users and data.",
         },
         "ar": {
-            "title": "الأمن",
-            "body": "تطبق فرصتي التشفير وضوابط الوصول وسجلات التدقيق لحماية المستخدمين والبيانات.",
+            "title": "الأمان",
+            "body": "تطبق فرصتي التشفير وضوابط الوصول وتسجيل المراجعة لحماية المستخدمين والبيانات.",
         },
     },
 }
@@ -100,14 +100,14 @@ def public_page(request, page_key):
     if not content:
         return JsonResponse({"detail": "page not found"}, status=404)
     html = f"""<!doctype html>
-<html lang="{lang}" dir="{'rtl' if lang == 'ar' else 'ltr'}">
+<html lang=\"{lang}\" dir=\"{'rtl' if lang == 'ar' else 'ltr'}\">
   <head>
-    <meta charset="utf-8">
-    <title>{content["title"]}</title>
+    <meta charset=\"utf-8\">
+    <title>{content['title']}</title>
   </head>
   <body>
-    <h1>{content["title"]}</h1>
-    <p>{content["body"]}</p>
+    <h1>{content['title']}</h1>
+    <p>{content['body']}</p>
   </body>
 </html>
 """

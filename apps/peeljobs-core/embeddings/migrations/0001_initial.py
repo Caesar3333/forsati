@@ -1,5 +1,6 @@
 from django.db import migrations, models
 from django.contrib.postgres.operations import CreateExtension
+import django.db.models.deletion
 import pgvector.django
 
 
@@ -7,7 +8,11 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = []
+    dependencies = [
+        ("accounts", "0001_initial"),
+        ("jobs", "0001_initial"),
+        ("keywords", "0001_initial"),
+    ]
 
     operations = [
         CreateExtension("vector"),
@@ -21,15 +26,12 @@ class Migration(migrations.Migration):
                 ("metadata_json", models.JSONField(blank=True, default=dict)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
-                ("keyword", models.CharField(db_index=True, max_length=255)),
-                ("country", models.CharField(db_index=True, max_length=5)),
-                ("language", models.CharField(db_index=True, max_length=8)),
-                ("pack", models.CharField(blank=True, max_length=255)),
+                ("keyword_item", models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name="embedding", to="keywords.keyworditem")),
             ],
-            options={"ordering": ["keyword"]},
+            options={"db_table": "keyword_embeddings"},
         ),
         migrations.CreateModel(
-            name="JobEmbedding",
+            name="OpportunityEmbedding",
             fields=[
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
                 ("embedding", pgvector.django.VectorField(dimensions=1536)),
@@ -38,11 +40,9 @@ class Migration(migrations.Migration):
                 ("metadata_json", models.JSONField(blank=True, default=dict)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
-                ("job_id", models.CharField(db_index=True, max_length=64)),
-                ("country", models.CharField(blank=True, db_index=True, max_length=5)),
-                ("language", models.CharField(blank=True, db_index=True, max_length=8)),
+                ("opportunity", models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name="embedding", to="jobs.opportunity")),
             ],
-            options={"ordering": ["job_id"]},
+            options={"db_table": "opportunity_embeddings"},
         ),
         migrations.CreateModel(
             name="CandidateEmbedding",
@@ -54,10 +54,8 @@ class Migration(migrations.Migration):
                 ("metadata_json", models.JSONField(blank=True, default=dict)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
-                ("candidate_id", models.CharField(db_index=True, max_length=64)),
-                ("country", models.CharField(blank=True, db_index=True, max_length=5)),
-                ("language", models.CharField(blank=True, db_index=True, max_length=8)),
+                ("user", models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name="embedding", to="accounts.user")),
             ],
-            options={"ordering": ["candidate_id"]},
+            options={"db_table": "candidate_embeddings"},
         ),
     ]

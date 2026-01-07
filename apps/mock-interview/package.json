@@ -1,0 +1,10 @@
+{
+  "name": "forsati-mock-interview-stub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Forsati mock interview stub",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

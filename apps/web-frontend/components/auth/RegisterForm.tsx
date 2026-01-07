@@ -106,7 +106,7 @@ export function RegisterForm() {
       </form>
       <div className="mt-4 text-sm text-ink-500">
         {isAr ? "لديك حساب؟ " : "Already have an account? "}
-        <Link href={`/${lang}/login`} className="text-brand-600">
+        <Link href={`/${lang}/auth/login`} className="text-brand-600">
           {isAr ? "سجّل الدخول" : "Sign in"}
         </Link>
       </div>

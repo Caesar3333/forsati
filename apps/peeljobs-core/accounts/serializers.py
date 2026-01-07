@@ -12,6 +12,12 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ("id", "email", "role", "status", "created_at")
 
 
+class AdminUserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("role", "status", "is_staff", "is_active")
+
+
 class CandidateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = CandidateProfile
@@ -59,3 +65,17 @@ class RegisterSerializer(serializers.Serializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
+
+
+class ForgotPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class ResetPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    code = serializers.CharField()
+    password = serializers.CharField(write_only=True, min_length=8)
+
+
+class VerifyCodeSerializer(serializers.Serializer):
+    code = serializers.CharField()
