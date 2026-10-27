@@ -3,11 +3,12 @@ const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
 const [, , specPath, outDir] = process.argv;
 const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
-const F = p => 'file://' + path.resolve(__dirname, 'node_modules/@fontsource', p);
+// fonts are inlined as data URLs: Chromium refuses file:// fonts from an about:blank page
+const F = p => 'data:font/woff2;base64,' + fs.readFileSync(path.resolve(__dirname, 'node_modules/@fontsource', p)).toString('base64');
 const css = `
 @font-face{font-family:Plex;font-weight:300;src:url(${F('ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-300-normal.woff2')})}
 @font-face{font-family:Plex;font-weight:600;src:url(${F('ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-600-normal.woff2')})}
-@font-face{font-family:Ruqaa;font-weight:700;src:url(${F('aref-ruqaa/files/aref-ruqaa-arabic-700-normal.woff2')})}
+@font-face{font-family:Ruqaa;font-weight:700;src:url(${F('aref-ruqaa-ink/files/aref-ruqaa-ink-arabic-700-normal.woff2')})}
 html,body{margin:0;width:1080px;height:1920px;background:transparent}
 .card{position:absolute;left:110px;right:110px;direction:rtl;text-align:center;font-family:Plex;font-weight:300;
  color:#EDE6D6;font-size:66px;line-height:1.55;text-shadow:0 2px 18px rgba(0,0,0,.85),0 0 42px rgba(0,0,0,.55)}

@@ -29,8 +29,10 @@ GRADE = "eq=brightness=-0.03:contrast=1.06:saturation=0.82,colorbalance=rs=-0.04
 def run(*a): subprocess.run(a, check=True)
 os.makedirs(f"{W}/seg", exist_ok=True); os.makedirs(f"{W}/cards", exist_ok=True)
 
-# 1) background segments
+# 1) background segments (skipped when bg.mp4 already exists and SKIP_BG=1)
+REBUILD_BG = not (os.environ.get("SKIP_BG") and os.path.exists(f"{W}/bg.mp4"))
 for i, (a, b, src, kind, mo) in enumerate(SEG):
+    if not REBUILD_BG: break
     dur = (b - a) + (XF if i < len(SEG) - 1 else 0)
     n = int(round(dur * FPS)); out = f"{W}/seg/{i:02}.mp4"
     if kind == "img":
@@ -55,7 +57,7 @@ for i in range(1, len(SEG)):
     fc.append(f"{last}[{i}:v]xfade=transition=fade:duration={XF}:offset={SEG[i][0]:.3f}{lab}")
     last = lab
 fc.append(f"{last}vignette=PI/4.5,noise=alls=5:allf=t,format=yuv420p[v]")
-run("ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(fc), "-map", "[v]",
+if REBUILD_BG: run("ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(fc), "-map", "[v]",
     "-c:v", "libx264", "-crf", "16", "-r", str(FPS), f"{W}/bg.mp4")
 
 # 3) text cards
@@ -99,6 +101,6 @@ fc.append(f"[{nv+1}:a][{nv+2}:a]amix=inputs=2:weights='1 0.25':normalize=0,lowpa
 fc.append(f"[{nv+3}:a]volume=0.12,adelay=62720|62720,apad[nt]")
 fc.append(f"[{nv}:a][dr][nt]amix=inputs=3:normalize=0:duration=first,alimiter=limit=0.89[a]")
 run("ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(fc), "-map", last, "-map", "[a]",
-    "-t", f"{TOTAL}", "-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p",
+    "-t", f"{TOTAL}", "-c:v", "libx264", "-b:v", "6M", "-maxrate", "8M", "-bufsize", "12M", "-preset", "medium", "-pix_fmt", "yuv420p",
     "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", f"{D}/draft_v1.mp4")
 print("done")
