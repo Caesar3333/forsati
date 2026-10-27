@@ -1,0 +1,18 @@
+{
+  "name": "ma-la-yuqal-remotion",
+  "private": true,
+  "scripts": {
+    "data": "python3 -I make_data.py",
+    "render": "remotion render src/index.jsx MaLaYuqal ../../final/ma_la_yuqal_9x16.mp4"
+  },
+  "dependencies": {
+    "@fontsource/aref-ruqaa-ink": "5.3.0",
+    "@fontsource/ibm-plex-sans-arabic": "5.3.0",
+    "@remotion/bundler": "4.0.539",
+    "@remotion/cli": "4.0.539",
+    "@remotion/renderer": "4.0.539",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.539"
+  }
+}
