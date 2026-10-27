@@ -1,0 +1,15 @@
+{
+ "scenes": [
+  {"kind": "aroll",    "start": 0.00,  "end": 11.45, "file": null, "trim": 0.00, "tags": true, "snapshot": 9.58},
+  {"kind": "bigtype",  "start": 11.45, "end": 16.05},
+  {"kind": "polaroid", "start": 16.05, "end": 23.77},
+  {"kind": "aroll",    "start": 23.77, "end": 30.25, "file": null, "trim": 0.07},
+  {"kind": "labels",   "start": 30.25, "end": 37.25},
+  {"kind": "pullback", "start": 37.25, "end": 43.50},
+  {"kind": "climax",   "start": 43.50, "end": 46.07},
+  {"kind": "aroll",    "start": 46.07, "end": 54.47, "file": null, "trim": 0.07},
+  {"kind": "past",     "start": 54.47, "end": 59.75},
+  {"kind": "aroll",    "start": 59.75, "end": 62.72, "file": null, "trim": 0.05},
+  {"kind": "logo",     "start": 62.72, "end": 65.22}
+ ]
+}

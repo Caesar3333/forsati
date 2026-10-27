@@ -7,6 +7,7 @@ import '@fontsource/ibm-plex-sans-arabic/300.css';
 import '@fontsource/ibm-plex-sans-arabic/600.css';
 import '@fontsource/aref-ruqaa-ink/700.css';
 import data from './data.json';
+import {FilmV2} from './v2.jsx';
 
 const IVORY = '#EDE6D6';
 const COPPER = '#B8835A';
@@ -252,6 +253,10 @@ const Film = () => {
 };
 
 registerRoot(() => (
-  <Composition id="MaLaYuqal" component={Film} durationInFrames={Math.round(data.total * data.fps)}
-    fps={data.fps} width={1080} height={1920} />
+  <>
+    <Composition id="MaLaYuqal" component={Film} durationInFrames={Math.round(data.total * data.fps)}
+      fps={data.fps} width={1080} height={1920} />
+    <Composition id="MaLaYuqalV2" component={FilmV2} durationInFrames={Math.round(data.total * data.fps)}
+      fps={data.fps} width={1080} height={1920} />
+  </>
 ));
