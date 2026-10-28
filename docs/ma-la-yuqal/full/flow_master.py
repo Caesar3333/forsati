@@ -17,10 +17,11 @@ VOICE = ("A natural adult male voice, warm, grounded and clear, speaking to one 
          "across the clip. Do not change the written spelling. Do not force a hard qaf. "
          "Natural Jordanian word linking, conversational rhythm, short pauses only where the meaning requires them. "
          + no("theatrical acting", "whispering", "robotic delivery") + " Speak only the supplied dialogue. "
-         + no("added words", "omitted words", "repeated words", "translation", "paraphrasing")
+         + no("added words", "omitted words", "accidentally repeated words", "merged phrases", "invented connecting words", "translation", "paraphrasing")
          + " Treat punctuation as pacing guidance only. Do not read punctuation aloud.")
-PERF = ("Subtle facial expressions, natural blinking, small head movements, restrained hand gestures below the chin, realistic "
-        "speech-aligned mouth movement. Keep the whole mouth visible at all times.")
+PERF = ("Subtle facial expressions, natural blinking, small head movements, restrained hand gestures below the chin. Restrained, "
+        "believable mouth movement that broadly follows the dialogue. Keep the whole mouth visible at all times. "
+        + no("exaggerated mouth opening", "chewing-like movement", "excessive smiling", "mouth movement during long pauses"))
 CAM = {
     "front": ("Vertical 9:16. Medium close-up at eye level, exactly matching the reference frame's composition (head in the upper third, "
               "microphone entering from frame-right below mouth level). Very slow push-in of no more than 2%, otherwise locked-off."),
@@ -180,6 +181,12 @@ def gen_secs(s):
     d = s["b"] - s["a"]
     return 10 if s["kind"] == "A" else (6 if d <= 6 else 8 if d <= 8 else 10)
 
+# restarts confirmed by re-transcribing the recording: «…بموقف صار معي من فترة… موقف…»
+RESTART = {"A01.1": ["موقف"]}
+def reps(line):
+    w = re.findall(r"[\u0621-\u0652]+", line)
+    return sorted({a for a, b in zip(w, w[1:]) if a == b})
+
 def a_prompt(s):
     return "\n".join([
         f"SHOT ID: {s['id']}",
@@ -189,6 +196,7 @@ def a_prompt(s):
         "",
         "EXACT SPOKEN DIALOGUE:",
         f"\"{s['line']}\"",
+        *[f"Intentional repetition: the repeated word «{r}» is spoken twice in the real recording. Keep both." for r in reps(s["line"]) + RESTART.get(s["id"], [])],
         "",
         f"Voice and Delivery: {VOICE}",
         f"Performance: {PERF}",
