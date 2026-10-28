@@ -57,7 +57,7 @@ for kind, it in items:
             mode = "Ingredients: @me + studio_front.jpg" if k == 1 else f"First frame = آخر إطار من {sid}.{k - 1} + @me"
             L.append(f"**{sid}.{k}** ({b - a:.1f} ث → ولّد 10 ث) — {mode} — زاوية: {'جانبية' if ang == 'side' else 'أمامية'}\n```\n"
                      f"9:16 vertical. @me, a calm thoughtful podcast host in {WARDROBE}, speaks naturally to an unseen listener with subtle head tilts and slow blinks, "
-                     f"saying in urban Jordanian (Ammani) colloquial Arabic, relaxed conversational pace, not Egyptian, not Gulf, not Modern Standard: \"{line}\". {CAM[ang]}. "
+                     f"saying in natural urban Jordanian (Ammani) Levantine Arabic (بلهجة أردنية عمّانية محكية), relaxed conversational pace, not Egyptian, not Gulf, not Modern Standard: \"{line}\". {CAM[ang]}. "
                      + ("Continue exactly from the provided first frame: same pose, clothes, set and light, no cut. " if k > 1 else "")
                      + f"Set: {SET}. {LIGHT}. {STYLE}. {GUARD}\n```\n")
     else:
