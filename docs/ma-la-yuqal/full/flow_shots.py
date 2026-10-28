@@ -4,10 +4,8 @@ import json
 from phrases import P
 plan = json.load(open("plan.json"))
 REF = "{REF_ID}"                       # the approved character image / media_id in Flow
-WARDROBE = "a navy-blue unstructured wool blazer over a heather-grey crew-neck t-shirt"   # [WARDROBE] — change here or find-replace in the prompts
-IDENT = ("Keep his exact identity from the reference: short dark hair with receding temples, trimmed beard, "
-         "moustache with goatee, grey hairs in the beard, small dark mole above the LEFT corner of his upper lip "
-         "(image-right when he faces camera). Natural skin texture, not beautified.")
+WARDROBE = "a navy-blue unstructured wool blazer over a heather warm-grey crew-neck t-shirt"   # [WARDROBE] — change here or find-replace in the prompts
+IDENT = "Keep his exact identity from the reference (unmirrored): oval, moderately long face with natural full cheeks, medium-defined jaw, rounded chin; broad, fairly high forehead with natural recession at both temples; short black hair, slightly wavy on top, light taper on the sides with a few grey hairs; thick, dark, broad, almost straight eyebrows with a slight outer arch; almond-shaped dark-brown eyes with slightly heavy upper lids and a calm gaze; straight, medium-width, slightly prominent nose with a rounded tip; fuller lower lip; connected Van Dyke beard — full defined moustache joined to a dense chin beard with a soul patch, lighter tapered stubble on the cheeks and jaw, scattered grey hairs in the chin beard; ONE small dark round mole directly above the LEFT corner of his upper lip, above the left end of the moustache (it appears on the viewer's RIGHT in a front shot) — never remove, move, resize or mirror it; warm olive / medium-tan skin with natural pores, not beautified, no smoothing, no symmetry correction. Athletic-medium build, broad straight shoulders, watch on the left wrist."   # from refs/IDENTITY_SPEC.md
 SET = ("warm, intimate podcast studio: dark walnut vertical-slat acoustic wall, wooden shelves with a few books, an amber "
        "glass globe lamp with a glowing Edison filament, light walnut desk in the foreground, black dynamic podcast "
        "microphone on a boom arm at chin height beside his mouth (never covering it)")
