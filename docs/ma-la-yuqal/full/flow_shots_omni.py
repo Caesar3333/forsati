@@ -1,0 +1,85 @@
+"""FLOW_SHOTS_OMNI.md — shot list rebuilt on what Flow reported: Omni 1.1 Flash, <= 10 s per generation,
+avatar @me, compact prompts (<= ~150 words) in Flow's preferred order:
+[Subject & Action] + [Camera & Composition] + [Environment & Lighting] + [Style & Mood] + [Strict Constraints]."""
+import json, re
+from phrases import P
+plan = json.load(open("plan.json"))
+LIMIT = 10.0
+WARDROBE = "a navy blazer over a heather warm-grey t-shirt"
+SET = ("dark walnut vertical-slat wall, wooden shelves with a few books, a warm amber globe Edison lamp glowing in soft bokeh, "
+       "light walnut desk, black dynamic microphone on a boom arm positioned slightly to the side of his mouth")
+LIGHT = "moody low-key lighting, soft warm tungsten key from camera-left, gentle shadows"
+STYLE = "photorealistic cinematic podcast footage, natural skin texture, shallow depth of field, calm and reflective"
+GUARD = ("Do not mirror or flip horizontally; keep the small dark mole above the LEFT corner of his upper lip (viewer's right) "
+         "and his connected moustache-goatee beard with grey hairs. Mouth always visible. No on-screen text, no overlays, no titles.")
+CAM = {"front": "Medium close-up, eye level, slow 2% push-in", "side": "Tight three-quarter close-up from his right side, slow subtle pan"}
+REFLECT = ["حالك", "حالنا", "طبيعتي", "من متى", "بتتعبك", "تسكت", "أصعب حوار", "مع حالنا"]
+B = {
+ "B01": "A single glowing copper question mark slowly forms from drifting golden dust in a dark void, a fainter reflection appearing behind it.",
+ "B02": "Old faded photographs float slowly in darkness like memories, gently turning, then dissolving into warm dust while a soft amber glow remains.",
+ "B03": "A vintage sepia photograph of an empty room on dark wood slowly catches fire at one corner, glowing embers curling the edge.",
+ "B04": "Split vertical frame: one hand slowly opens letting warm light through, the other closes into a fist around a small glowing card.",
+ "B05": "Blank worn paper cards flutter down in slow motion onto a dark desk and pile up, then the pile slides off the edge.",
+ "B06": "The camera slowly pulls back down a dark corridor from a man standing before a tall doorway glowing with golden light and haze.",
+ "B07": "A hand wipes a streak through a fogged bathroom mirror in a dim room, revealing a blurred younger reflection that fades back into fog.",
+ "B08": "A ribbon of warm light twists into a knot in a dark void, then slowly loosens into a straight line moving forward.",
+ "B09": "A thin glowing copper thread carries a tiny light across a dark crack in the ground, then gently loosens and fades.",
+ "B10": "A dark human silhouette in profile filled with a slow galaxy of warm particles and faint glowing fragments of memories.",
+ "B11": "An old photograph on dark wood is missing several jigsaw pieces; the pieces drift in from darkness, one corner stays empty.",
+ "B12": "Two identical men sit facing each other across a dark desk like mirror reflections, silent, a warm lamp between them; the camera slowly circles.",
+ "B13": "A large glass lens shaped like a question mark hangs in a dark room; as the camera moves through it the blurred room behind becomes sharp and warm.",
+ "B14": "Fast reverse-motion flicker of moments (a rainy train window, a covered living room, a fogged mirror, a lit doorway), stopping on one still warm frame.",
+ "B15": "A dark line slowly strikes across a faded photograph on dark wood, then warm light grows from beneath it.",
+}
+BLOOK = "Macro / cinematic lens, shallow depth of field, warm tungsten light against deep teal-black shadows, slow elegant motion, 24fps. No people unless described, no readable text, letters or numbers."
+def phr(a, b): return [p for p in P if p[0] >= a - 0.05 and p[0] < b]
+def chunks(a, b):
+    ps, out, s, cur = phr(a, b), [], a, []
+    for p in ps:
+        if cur and p[1] - s > LIMIT: out.append((s, cur[-1][1] + 0.1, cur)); s, cur = p[0], []
+        cur.append(p)
+    out.append((s, b, cur)); return out
+def split_even(a, b):
+    n = max(1, int(-(-(b - a) // LIMIT))); d = (b - a) / n
+    return [(a + i * d, a + (i + 1) * d) for i in range(n)]
+mm = lambda x: f"{int(x // 60)}:{x % 60:04.1f}"
+items = sorted([("A", a) for a in plan["aroll"]] + [("B", b) for b in plan["broll"]], key=lambda x: x[1]["start"])
+L, n, secs = [], 0, 0.0
+for kind, it in items:
+    sid = it["id"]
+    if kind == "A":
+        parts = chunks(it["start"], it["end"])
+        L.append(f"\n### {sid} — {mm(it['start'])}–{mm(it['end'])} · بودكاست · {len(parts)} {'لقطة' if len(parts) == 1 else 'لقطات'}\n")
+        for k, (a, b, ps) in enumerate(parts, 1):
+            n += 1; secs += 10
+            line = " ".join(p[2].replace(" [؟]", "") for p in ps)
+            ang = "side" if any(w in line for w in REFLECT) else ("front" if k % 2 else "side")
+            mode = "Ingredients: @me + studio_front.jpg" if k == 1 else f"First frame = آخر إطار من {sid}.{k - 1} + @me"
+            L.append(f"**{sid}.{k}** ({b - a:.1f} ث → ولّد 10 ث) — {mode} — زاوية: {'جانبية' if ang == 'side' else 'أمامية'}\n```\n"
+                     f"9:16 vertical. @me, a calm thoughtful podcast host in {WARDROBE}, speaks naturally to an unseen listener with subtle head tilts and slow blinks, "
+                     f"saying in spoken Levantine Arabic: \"{line}\". {CAM[ang]}. "
+                     + ("Continue exactly from the provided first frame: same pose, clothes, set and light, no cut. " if k > 1 else "")
+                     + f"Set: {SET}. {LIGHT}. {STYLE}. {GUARD}\n```\n")
+    else:
+        parts = split_even(it["start"], it["end"])
+        line = " ".join(p[2].replace(" [؟]", "") for p in phr(it["start"], it["end"]))
+        L.append(f"\n### {sid} — {mm(it['start'])}–{mm(it['end'])} · موشن · {len(parts)} {'لقطة' if len(parts) == 1 else 'لقطات'}\n> النص على الشاشة (يُضاف في المونتاج): {line}\n")
+        for k, (a, b) in enumerate(parts, 1):
+            n += 1; dur = 10 if b - a > 8 else (8 if b - a > 6 else 6); secs += dur
+            L.append(f"**{sid}.{k}** ({b - a:.1f} ث → ولّد {dur} ث){' — First frame = آخر إطار من ' + sid + '.' + str(k - 1) if k > 1 else ''}\n```\n"
+                     f"9:16 vertical cinematic B-roll metaphor. {B[sid]} "
+                     + ("Continue the same scene from the provided first frame, evolving slowly, no cut. " if k > 1 else "")
+                     + f"{BLOOK}\n```\n")
+credits = secs / 10 * 15
+head = f"""# أوامر Google Flow — Omni 1.1 Flash (حتى 10 ث للقطة) — {n} لقطة
+
+مبنية على إجابة Flow: الأفتار `@me`، و10 ثوانٍ كحد أقصى للتوليد الواحد، و720p، وأوامر من 100 إلى 180 كلمة، والقيود مكتوبة كجمل داخل الأمر لأن خانة الأوامر السلبية غير مدعومة.
+
+- **أول لقطة في كل مقطع بودكاست:** وضع Ingredients مع `@me` وصورة `studio_front.jpg`.
+- **اللقطات التالية:** First Frame = آخر إطار من اللقطة السابقة (نزّله من خيارات الفيديو) + `@me`.
+- **ولّد كل لقطة بطول 10 ثوانٍ أو أكثر من مدتها**، وتُقص لاحقاً في المونتاج على توقيت الخطة.
+- **صوت Flow يُكتم.** الصوت النهائي هو تسجيلك.
+- **التقدير بدون إعادات:** ‎{secs:.0f} ثانية توليد ≈ **{credits:.0f} رصيد** بدقة 720p. احسب ×1.5 إلى ×2 للإعادات ≈ **{credits * 1.5:.0f}–{credits * 2:.0f} رصيد**.
+"""
+open("FLOW_SHOTS_OMNI.md", "w").write(head + "".join(L))
+print(n, "shots", secs, "s", credits, "credits")
