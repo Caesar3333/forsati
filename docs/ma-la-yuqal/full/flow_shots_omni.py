@@ -32,6 +32,13 @@ B = {
  "B15": "A dark line slowly strikes across a faded photograph on dark wood, then warm light grows from beneath it.",
 }
 BLOOK = "Macro / cinematic lens, shallow depth of field, warm tungsten light against deep teal-black shadows, slow elegant motion, 24fps. No people unless described, no readable text, letters or numbers."
+# urban Jordanian: qaf pronounced as a glottal stop; the title phrase «يُقال» stays as is
+QAF = {"موقف": "موأف", "بموقف": "بموأف", "الموقف": "الموأف", "لمواقف": "لمواأف", "حق": "حأ", "قاعد": "آعد",
+       "وقتها": "وأتها", "بوقت": "بوأت", "الوقت": "الوأت", "طريقة": "طريئة", "بطريقة": "بطريئة", "الطريقة": "الطريئة",
+       "بهالطريقة": "بهالطريئة", "القصة": "الأصة", "قصة": "أصة", "وقف": "وأف", "نوقف": "نوأف", "استوقفني": "استوأفني",
+       "قديمة": "أديمة", "مقتنع": "مأتنع", "قابلنا": "آبلنا", "الحقيقة": "الحئيئة", "لحقيقة": "لحئيئة", "حقيقي": "حئيئي",
+       "القدر": "الأدر", "نوافقه": "نوافأه", "بقناعاتنا": "بأناعاتنا", "نلاقي": "نلائي", "وقبل": "وأبل"}
+def jo(t): return re.sub(r"[\u0621-\u0652]+", lambda m: QAF.get(m.group(), m.group()), t)
 def phr(a, b): return [p for p in P if p[0] >= a - 0.05 and p[0] < b]
 def chunks(a, b):
     ps, out, s, cur = phr(a, b), [], a, []
@@ -57,7 +64,7 @@ for kind, it in items:
             mode = "Ingredients: @me + studio_front.jpg" if k == 1 else f"First frame = آخر إطار من {sid}.{k - 1} + @me"
             L.append(f"**{sid}.{k}** ({b - a:.1f} ث → ولّد 10 ث) — {mode} — زاوية: {'جانبية' if ang == 'side' else 'أمامية'}\n```\n"
                      f"9:16 vertical. @me, a calm thoughtful podcast host in {WARDROBE}, speaks naturally to an unseen listener with subtle head tilts and slow blinks, "
-                     f"saying in natural urban Jordanian (Ammani) Levantine Arabic (بلهجة أردنية عمّانية محكية), relaxed conversational pace, not Egyptian, not Gulf, not Modern Standard: \"{line}\". {CAM[ang]}. "
+                     f"saying in natural urban Jordanian (Ammani) Levantine Arabic (بلهجة أردنية عمّانية محكية), relaxed conversational pace, not Egyptian, not Gulf, not Modern Standard: \"{jo(line)}\". {CAM[ang]}. "
                      + ("Continue exactly from the provided first frame: same pose, clothes, set and light, no cut. " if k > 1 else "")
                      + f"Set: {SET}. {LIGHT}. {STYLE}. {GUARD}\n```\n")
     else:
