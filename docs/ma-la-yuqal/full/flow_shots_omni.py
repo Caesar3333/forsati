@@ -38,6 +38,7 @@ QAF = {"موقف": "موأف", "بموقف": "بموأف", "الموقف": "ال
        "بهالطريقة": "بهالطريئة", "القصة": "الأصة", "قصة": "أصة", "وقف": "وأف", "نوقف": "نوأف", "استوقفني": "استوأفني",
        "قديمة": "أديمة", "مقتنع": "مأتنع", "قابلنا": "آبلنا", "الحقيقة": "الحئيئة", "لحقيقة": "لحئيئة", "حقيقي": "حئيئي",
        "القدر": "الأدر", "نوافقه": "نوافأه", "بقناعاتنا": "بأناعاتنا", "نلاقي": "نلائي", "وقبل": "وأبل"}
+QAF_AS_HAMZA = False  # the tested A01.1 prompt worked with normal spelling (قاعد)
 def jo(t): return re.sub(r"[\u0621-\u0652]+", lambda m: QAF.get(m.group(), m.group()), t)
 def phr(a, b): return [p for p in P if p[0] >= a - 0.05 and p[0] < b]
 def chunks(a, b):
@@ -64,7 +65,7 @@ for kind, it in items:
             mode = "Ingredients: @me + studio_front.jpg" if k == 1 else f"First frame = آخر إطار من {sid}.{k - 1} + @me"
             L.append(f"**{sid}.{k}** ({b - a:.1f} ث → ولّد 10 ث) — {mode} — زاوية: {'جانبية' if ang == 'side' else 'أمامية'}\n```\n"
                      f"9:16 vertical. @me, a calm thoughtful podcast host in {WARDROBE}, speaks naturally to an unseen listener with subtle head tilts and slow blinks, "
-                     f"saying in natural urban Jordanian (Ammani) Levantine Arabic (بلهجة أردنية عمّانية محكية), relaxed conversational pace, not Egyptian, not Gulf, not Modern Standard: \"{jo(line)}\". {CAM[ang]}. "
+                     f"saying in spoken urban Jordanian (Ammani) Levantine Arabic: \"{jo(line) if QAF_AS_HAMZA else line}\". {CAM[ang]}. "
                      + ("Continue exactly from the provided first frame: same pose, clothes, set and light, no cut. " if k > 1 else "")
                      + f"Set: {SET}. {LIGHT}. {STYLE}. {GUARD}\n```\n")
     else:
