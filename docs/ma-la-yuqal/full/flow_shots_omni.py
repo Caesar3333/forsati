@@ -10,8 +10,8 @@ SET = ("dark walnut vertical-slat wall, wooden shelves with a few books, a warm 
        "light walnut desk, black dynamic microphone on a boom arm positioned slightly to the side of his mouth")
 LIGHT = "moody low-key lighting, soft warm tungsten key from camera-left, gentle shadows"
 STYLE = "photorealistic cinematic podcast footage, natural skin texture, shallow depth of field, calm and reflective"
-GUARD = ("Do not mirror or flip horizontally; keep the small dark mole above the LEFT corner of his upper lip (viewer's right) "
-         "and his connected moustache-goatee beard with grey hairs. Mouth always visible. No on-screen text, no overlays, no titles.")
+GUARD = ("Never mirror the image. Never flip the image horizontally. Keep the small dark mole above the LEFT corner of his upper lip (viewer's right) "
+         "and his connected moustache-goatee beard with grey hairs. Mouth always visible. No on-screen text. No overlays. No titles.")
 CAM = {"front": "Medium close-up, eye level, slow 2% push-in", "side": "Three-quarter close-up from his right side (about 30 degrees), both eyes and the full mouth visible, slow subtle pan"}
 REFLECT = ["حالك", "حالنا", "طبيعتي", "من متى", "بتتعبك", "تسكت", "أصعب حوار", "مع حالنا"]
 B = {
@@ -31,7 +31,7 @@ B = {
  "B14": "Fast reverse-motion flicker of moments (a rainy train window, a covered living room, a fogged mirror, a lit doorway), stopping on one still warm frame.",
  "B15": "A dark line slowly strikes across a faded photograph on dark wood, then warm light grows from beneath it.",
 }
-BLOOK = "Macro / cinematic lens, shallow depth of field, warm tungsten light against deep teal-black shadows, slow elegant motion, 24fps. No people unless described, no readable text, letters or numbers."
+BLOOK = "Macro / cinematic lens, shallow depth of field, warm tungsten light against deep teal-black shadows, slow elegant motion, 24fps. No people unless described. No readable text. No letters. No numbers."
 # urban Jordanian: qaf pronounced as a glottal stop; the title phrase «يُقال» stays as is
 QAF = {"موقف": "موأف", "بموقف": "بموأف", "الموقف": "الموأف", "لمواقف": "لمواأف", "حق": "حأ", "قاعد": "آعد",
        "وقتها": "وأتها", "بوقت": "بوأت", "الوقت": "الوأت", "طريقة": "طريئة", "بطريقة": "بطريئة", "الطريقة": "الطريئة",
@@ -78,7 +78,7 @@ for kind, it in items:
             n += 1; dur = 10 if b - a > 8 else (8 if b - a > 6 else 6); secs += dur
             L.append(f"**{sid}.{k}** ({b - a:.1f} ث → ولّد {dur} ث){' — First frame = آخر إطار من ' + sid + '.' + str(k - 1) if k > 1 else ''}\n```\n"
                      f"9:16 vertical cinematic B-roll metaphor. {B[sid]} "
-                     + ("Continue the same scene from the provided first frame, evolving slowly, no cut. " if k > 1 else "")
+                     + ("Continue the same scene from the provided first frame, evolving slowly. No cut. " if k > 1 else "")
                      + f"{BLOOK}\n```\n")
 credits = secs / 10 * 15
 head = f"""# أوامر Google Flow — Omni 1.1 Flash (حتى 10 ث للقطة) — {n} لقطة

@@ -8,13 +8,17 @@ LIMIT = 10.0
 REFLECT = ["حالك", "حالنا", "طبيعتي", "من متى", "بتتعبك", "تسكت", "أصعب حوار", "مع حالنا"]
 JO = ["إشي", "مش", "هيك", "شو", "بدّي", "هالطريقة", "منحاول", "رح"]
 
-VOICE = ("A natural adult male voice, warm, grounded and clear, speaking to one listener in a natural urban Ammani Jordanian Arabic "
-         "dialect, not generic Levantine Arabic. Do not imitate Lebanese or Syrian accent patterns, do not switch to Modern Standard Arabic, "
-         "and do not exaggerate the dialect. The speaker himself pronounces qaf as a glottal stop in everyday colloquial words, as urban "
-         "Ammani speakers do; keep this consistent across the clip without changing the written spelling, and do not force a hard qaf. "
-         "Natural Jordanian word linking, conversational rhythm, short pauses only where the meaning requires them. No theatrical acting, "
-         "whispering or robotic delivery. Speak only the supplied dialogue: no additions, omissions, repetitions, translation or "
-         "paraphrase. Treat punctuation as pacing guidance, not as spoken content.")
+# every negative is its own sentence starting with No / Do not / Never, so no item can be read as something to add
+def no(*items): return " ".join(f"No {x}." for x in items)
+VOICE = ("A natural adult male voice, warm, grounded and clear, speaking to one listener in a natural urban Ammani Jordanian Arabic dialect. "
+         "Do not use generic Levantine Arabic. Do not imitate a Lebanese accent. Do not imitate a Syrian accent. "
+         "Do not switch to Modern Standard Arabic. Do not exaggerate the dialect. "
+         "The speaker himself pronounces qaf as a glottal stop in everyday colloquial words, as urban Ammani speakers do; keep this consistent "
+         "across the clip. Do not change the written spelling. Do not force a hard qaf. "
+         "Natural Jordanian word linking, conversational rhythm, short pauses only where the meaning requires them. "
+         + no("theatrical acting", "whispering", "robotic delivery") + " Speak only the supplied dialogue. "
+         + no("added words", "omitted words", "repeated words", "translation", "paraphrasing")
+         + " Treat punctuation as pacing guidance only. Do not read punctuation aloud.")
 PERF = ("Subtle facial expressions, natural blinking, small head movements, restrained hand gestures below the chin, realistic "
         "speech-aligned mouth movement. Keep the whole mouth visible at all times.")
 CAM = {
@@ -25,10 +29,11 @@ CAM = {
 }
 ENV = {
     "front": ("Navy unstructured blazer over a heather warm-grey crew-neck T-shirt. Dark walnut slatted wall, wooden shelves with a few "
-              "books, warm amber globe lamp in soft bokeh, light walnut desk, black dynamic microphone on a boom arm beside — not in front of — the mouth."),
+              "books, warm amber globe lamp in soft bokeh, light walnut desk, black dynamic microphone on a boom arm beside the mouth. "
+              "The microphone never covers the mouth."),
     "side": ("Navy unstructured blazer over a heather warm-grey crew-neck T-shirt. The same studio as the reference frame: walnut slatted wall, "
              "wooden shelves with a few books, warm amber Edison lamp in soft bokeh, light walnut desk, black dynamic microphone in the "
-             "foreground at frame-left, below the mouth and never covering it."),
+             "foreground at frame-left, below the mouth. The microphone never covers the mouth."),
 }
 LIGHT = {
     "front": ("Photorealistic cinematic podcast footage. Low-key warm tungsten key light from camera-left, gentle natural shadows, subtle "
@@ -38,15 +43,15 @@ LIGHT = {
 }
 IDENT = ("Use the exact identity from @me and the provided reference frame. Preserve the real facial structure, natural skin texture, "
          "short dark hair with receding temples, connected moustache and goatee with grey hairs in the chin, and the small dark mole above "
-         "the LEFT corner of the upper lip (viewer's right in a frontal view). Never mirror or flip the image. Do not beautify, de-age, "
-         "reshape, slim or replace the person; do not change the nose, jaw, eyes or mouth.")
-NEG_A = ("No on-screen text, subtitles, captions, titles, logos, watermarks, letters or numbers. No extra people, mirrored identity, facial "
-         "changes, obscured mouth, exaggerated gestures, sudden camera movement, cuts or scene changes, invented or duplicated dialogue, "
-         "music or sound effects.")
+         "the LEFT corner of the upper lip (viewer's right in a frontal view). Never mirror the image. Never flip the image horizontally. "
+         "Do not beautify the face. Do not de-age the face. Do not reshape the face. Do not slim the face. Do not replace the person. "
+         "Do not change the nose. Do not change the jaw. Do not change the eyes. Do not change the mouth.")
+NEG_A = no("on-screen text", "subtitles", "captions", "titles", "logos", "watermarks", "letters", "numbers", "extra people",
+           "mirrored identity", "facial changes", "obscured mouth", "exaggerated gestures", "sudden camera movement", "cuts",
+           "scene changes", "invented dialogue", "duplicated dialogue", "music", "sound effects")
 LOOK_B = "Cinematic warm amber highlights, deep teal-black shadows, soft atmospheric light, shallow depth of field, restrained contrast. Photorealistic."
-NEG_B = ("No readable text, letters, numbers, captions, subtitles, titles, logos, watermarks, random people, distracting objects, abrupt cuts, "
-         "excessive motion or unrelated elements. No dialogue, music or sound effects.")
-
+NEG_B = no("readable text", "letters", "numbers", "captions", "subtitles", "titles", "logos", "watermarks", "random people",
+           "distracting objects", "abrupt cuts", "excessive motion", "unrelated elements", "dialogue", "music", "sound effects")
 # B-roll: meaning, main visual, camera, avoid, and one phase per generated part (start -> end)
 B = {
  "B01": ("سؤال صغير بيخلخل اليقين: «بعرف شو صار فعلاً؟ ولا كيف فسّرته؟»",
@@ -72,7 +77,7 @@ B = {
          "split screens, two images in one frame, readable text on the card",
          ["A man's hand rests on dark wood, tightly closed around a small glowing card; the fingers slowly relax and the palm opens upward, releasing soft warm light into the dark; the shot ends on the open, empty palm."]),
  "B05": ("الجمل الجاهزة اللي بنعرّف حالنا فيها: «أنا عصبي»، «أنا هيك»",
-         "Blank worn paper cards (no writing) falling onto a dark desk.",
+         "Blank worn paper cards falling onto a dark desk. No writing on the cards.",
          "Medium close-up at desk height, slow lateral drift.",
          "any writing on the cards, chaotic motion",
          ["Blank worn paper cards flutter down in slow motion onto a dark desk and pile up one after another; the pile slowly slides off the desk edge into darkness; the shot ends on the empty desk."]),
@@ -213,7 +218,7 @@ def b_prompt(s, prev, nxt):
         f"Camera: {cam}",
         f"Lighting and Color: {LOOK_B}",
         f"Continuity: {cont}",
-        f"Negative Constraints: {NEG_B} Avoid: {avoid}.",
+        f"Negative Constraints: {NEG_B} " + no(*[re.sub(r"^(a|an) ", "", x.strip()) for x in avoid.split(", ")]),
     ])
 
 # ---------- timeline checks ----------
