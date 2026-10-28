@@ -10,15 +10,23 @@ JO = ["إشي", "مش", "هيك", "شو", "بدّي", "هالطريقة", "من�
 
 # every negative is its own sentence starting with No / Do not / Never, so no item can be read as something to add
 def no(*items): return " ".join(f"No {x}." for x in items)
-VOICE = ("A natural adult male voice, warm, grounded and clear, speaking to one listener in a natural urban Ammani Jordanian Arabic dialect. "
-         "Do not use generic Levantine Arabic. Do not imitate a Lebanese accent. Do not imitate a Syrian accent. "
-         "Do not switch to Modern Standard Arabic. Do not exaggerate the dialect. "
-         "The speaker himself pronounces qaf as a glottal stop in everyday colloquial words, as urban Ammani speakers do; keep this consistent "
-         "across the clip. Do not change the written spelling. Do not force a hard qaf. "
-         "Natural Jordanian word linking, conversational rhythm, short pauses only where the meaning requires them. "
-         + no("theatrical acting", "whispering", "robotic delivery") + " Speak only the supplied dialogue. "
-         + no("added words", "omitted words", "accidentally repeated words", "merged phrases", "invented connecting words", "translation", "paraphrasing")
-         + " Treat punctuation as pacing guidance only. Do not read punctuation aloud.")
+def voice(line):
+    # the user's Ammani lock: qaf as a brief glottal stop, applied to the qaf words of this shot only; spelling never changes
+    q = list(dict.fromkeys(w for w in re.findall(r"[\u0621-\u0652]+", line) if "ق" in w and w != "يُقال"))
+    words_ = (" Apply this consistently to the qaf words in this dialogue: " + "، ".join(q) + ". Keep their spelling unchanged. "
+              "These words are pronunciation guidance only. They are not extra dialogue.") if q else ""
+    return ("Speak in authentic, everyday urban Ammani Jordanian Arabic, in a relaxed, natural conversational voice of an adult man "
+            "talking to one listener. Critical pronunciation rule: do not pronounce the written letter ق as the formal Modern Standard "
+            "Arabic /q/. Pronounce it as a glottal stop /ʔ/, like the brief catch in the middle of the English expression “uh-oh”. "
+            "Do not turn it into a deep back-of-the-throat /q/." + words_ +
+            " Do not convert the dialogue into Modern Standard Arabic. Do not imitate a Lebanese accent. Do not imitate a Syrian accent. "
+            "Do not imitate an Egyptian accent. Do not imitate a Gulf accent. Do not imitate any other regional accent. "
+            "No exaggerated dialect performance. Use natural Ammani intonation, connected speech and ordinary conversational rhythm. "
+            + no("theatrical acting", "whispering", "robotic delivery") + " Speak only the exact supplied dialogue. "
+            + no("added words", "omitted words", "accidentally repeated words", "merged phrases", "invented connecting words",
+                 "translation", "paraphrasing")
+            + " Punctuation guides pauses only. Never speak punctuation aloud. If the pronunciation cannot be rendered reliably from "
+            "the written text, prioritise the colloquial Ammani pronunciation over formal Arabic pronunciation.")
 PERF = ("Subtle facial expressions, natural blinking, small head movements, restrained hand gestures below the chin. Restrained, "
         "believable mouth movement that broadly follows the dialogue. Keep the whole mouth visible at all times. "
         + no("exaggerated mouth opening", "chewing-like movement", "excessive smiling", "mouth movement during long pauses"))
@@ -198,7 +206,7 @@ def a_prompt(s):
         f"\"{s['line']}\"",
         *[f"Intentional repetition: the repeated word «{r}» is spoken twice in the real recording. Keep both." for r in reps(s["line"]) + RESTART.get(s["id"], [])],
         "",
-        f"Voice and Delivery: {VOICE}",
+        f"Voice and Delivery: {voice(s['line'])}",
         f"Performance: {PERF}",
         f"Camera and Framing: {CAM[s['ang']]}",
         f"Identity Lock: {IDENT}",
