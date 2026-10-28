@@ -56,17 +56,20 @@ L, n, secs, LS = [], 0, 0.0, []
 for kind, it in items:
     sid = it["id"]
     if kind == "A":
-        parts = chunks(it["start"], it["end"])
+        parts, prev = chunks(it["start"], it["end"]), None
         L.append(f"\n### {sid} — {mm(it['start'])}–{mm(it['end'])} · بودكاست · {len(parts)} {'لقطة' if len(parts) == 1 else 'لقطات'}\n")
         for k, (a, b, ps) in enumerate(parts, 1):
             n += 1; secs += 10; LS.append((f"{sid}.{k}", a, b))
             line = " ".join(p[2].replace(" [؟]", "") for p in ps)
             ang = "side" if any(w in line for w in REFLECT) else ("front" if k % 2 else "side")
-            mode = "Ingredients: @me + studio_front.jpg" if k == 1 else f"First frame = آخر إطار من {sid}.{k - 1} + @me"
+            # same angle as the previous shot -> continue from its last frame; new angle -> a clean cut from fresh ingredients
+            cont = k > 1 and ang == prev
+            mode = f"First frame = آخر إطار من {sid}.{k - 1} + @me" if cont else f"Ingredients: @me + studio_{ang}.jpg (قطع نظيف)"
+            prev = ang
             L.append(f"**{sid}.{k}** ({b - a:.1f} ث → ولّد 10 ث) — {mode} — زاوية: {'جانبية' if ang == 'side' else 'أمامية'}\n```\n"
                      f"9:16 vertical. @me, a calm thoughtful podcast host in {WARDROBE}, speaks naturally to an unseen listener with subtle head tilts and slow blinks, "
                      f"saying in spoken urban Jordanian (Ammani) Levantine Arabic: \"{jo(line) if QAF_AS_HAMZA else line}\". {CAM[ang]}. "
-                     + ("Continue exactly from the provided first frame: same pose, clothes, set and light, no cut. " if k > 1 else "")
+                     + ("Continue exactly from the provided first frame: same pose, clothes, set and light, no cut. " if cont else "")
                      + f"Set: {SET}. {LIGHT}. {STYLE}. {GUARD}\n```\n")
     else:
         parts = split_even(it["start"], it["end"])
@@ -84,7 +87,7 @@ head = f"""# أوامر Google Flow — Omni 1.1 Flash (حتى 10 ث للقطة)
 مبنية على إجابة Flow: الأفتار `@me`، و10 ثوانٍ كحد أقصى للتوليد الواحد، و720p، وأوامر من 100 إلى 180 كلمة، والقيود مكتوبة كجمل داخل الأمر لأن خانة الأوامر السلبية غير مدعومة.
 
 - **أول لقطة في كل مقطع بودكاست:** وضع Ingredients مع `@me` وصورة `studio_front.jpg`.
-- **اللقطات التالية:** First Frame = آخر إطار من اللقطة السابقة (نزّله من خيارات الفيديو) + `@me`.
+- **اللقطة التالية بنفس الزاوية:** First Frame = آخر إطار من اللقطة السابقة + `@me`. **تغيير الزاوية:** قطع نظيف بـ Ingredients مع `studio_front.jpg` أو `studio_side.jpg`.
 - **ولّد كل لقطة بطول 10 ثوانٍ أو أكثر من مدتها**، وتُقص لاحقاً في المونتاج على توقيت الخطة.
 - **صوت Flow يُكتم.** الصوت النهائي هو تسجيلك.
 - **التقدير بدون إعادات:** ‎{secs:.0f} ثانية توليد ≈ **{credits:.0f} رصيد** بدقة 720p. احسب ×1.5 إلى ×2 للإعادات ≈ **{credits * 1.5:.0f}–{credits * 2:.0f} رصيد**.
