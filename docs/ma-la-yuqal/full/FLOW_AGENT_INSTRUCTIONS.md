@@ -5,7 +5,7 @@
 
 ## 1. الصوت وحركة الفم — Voice & Mouth
 ```
-Flow cannot lip-sync to an uploaded audio file, so do not try. When @me speaks, animate natural mouth movement for the Arabic (Levantine) line written in the prompt, with relaxed jaw, visible lips and teeth, and natural pauses between phrases. Facial expression follows a calm, reflective, sincere tone; no exaggerated gestures. The generated audio will be muted and replaced by the host's real recording, so never add music, sound effects or another voice to the performance itself.
+Flow cannot lip-sync to an uploaded audio file, so do not try. When @me speaks, animate natural mouth movement for the Arabic line written in the prompt, spoken in urban Jordanian (Ammani) colloquial dialect — never Egyptian, Gulf or Modern Standard Arabic —, with relaxed jaw, visible lips and teeth, and natural pauses between phrases. Facial expression follows a calm, reflective, sincere tone; no exaggerated gestures. The generated audio will be muted and replaced by the host's real recording, so never add music, sound effects or another voice to the performance itself.
 ```
 
 ## 2. الهوية — Identity Lock
