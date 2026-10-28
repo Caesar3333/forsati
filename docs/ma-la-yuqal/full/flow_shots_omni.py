@@ -12,7 +12,7 @@ LIGHT = "moody low-key lighting, soft warm tungsten key from camera-left, gentle
 STYLE = "photorealistic cinematic podcast footage, natural skin texture, shallow depth of field, calm and reflective"
 GUARD = ("Do not mirror or flip horizontally; keep the small dark mole above the LEFT corner of his upper lip (viewer's right) "
          "and his connected moustache-goatee beard with grey hairs. Mouth always visible. No on-screen text, no overlays, no titles.")
-CAM = {"front": "Medium close-up, eye level, slow 2% push-in", "side": "Tight three-quarter close-up from his right side, slow subtle pan"}
+CAM = {"front": "Medium close-up, eye level, slow 2% push-in", "side": "Three-quarter close-up from his right side (about 30 degrees), both eyes and the full mouth visible, slow subtle pan"}
 REFLECT = ["حالك", "حالنا", "طبيعتي", "من متى", "بتتعبك", "تسكت", "أصعب حوار", "مع حالنا"]
 B = {
  "B01": "A single glowing copper question mark slowly forms from drifting golden dust in a dark void, a fainter reflection appearing behind it.",
@@ -36,7 +36,7 @@ def phr(a, b): return [p for p in P if p[0] >= a - 0.05 and p[0] < b]
 def chunks(a, b):
     ps, out, s, cur = phr(a, b), [], a, []
     for p in ps:
-        if cur and p[1] - s > LIMIT: out.append((s, cur[-1][1] + 0.1, cur)); s, cur = p[0], []
+        if cur and p[1] - s > LIMIT - 0.6: out.append((s, cur[-1][1] + 0.1, cur)); s, cur = p[0], []
         cur.append(p)
     out.append((s, b, cur)); return out
 def split_even(a, b):
@@ -44,14 +44,14 @@ def split_even(a, b):
     return [(a + i * d, a + (i + 1) * d) for i in range(n)]
 mm = lambda x: f"{int(x // 60)}:{x % 60:04.1f}"
 items = sorted([("A", a) for a in plan["aroll"]] + [("B", b) for b in plan["broll"]], key=lambda x: x[1]["start"])
-L, n, secs = [], 0, 0.0
+L, n, secs, LS = [], 0, 0.0, []
 for kind, it in items:
     sid = it["id"]
     if kind == "A":
         parts = chunks(it["start"], it["end"])
         L.append(f"\n### {sid} — {mm(it['start'])}–{mm(it['end'])} · بودكاست · {len(parts)} {'لقطة' if len(parts) == 1 else 'لقطات'}\n")
         for k, (a, b, ps) in enumerate(parts, 1):
-            n += 1; secs += 10
+            n += 1; secs += 10; LS.append((f"{sid}.{k}", a, b))
             line = " ".join(p[2].replace(" [؟]", "") for p in ps)
             ang = "side" if any(w in line for w in REFLECT) else ("front" if k % 2 else "side")
             mode = "Ingredients: @me + studio_front.jpg" if k == 1 else f"First frame = آخر إطار من {sid}.{k - 1} + @me"
@@ -83,3 +83,13 @@ head = f"""# أوامر Google Flow — Omni 1.1 Flash (حتى 10 ث للقطة)
 """
 open("FLOW_SHOTS_OMNI.md", "w").write(head + "".join(L))
 print(n, "shots", secs, "s", credits, "credits")
+
+# lip-sync audio: one slice of the real voice per A-roll shot, same range as the shot
+import os, subprocess
+os.makedirs("lipsync_audio", exist_ok=True)
+for sid, a, b in LS:
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{a:.3f}", "-to", f"{b:.3f}", "-i", "voice_full_-14LUFS.mp3",
+                    "-ac", "1", "-ar", "48000", f"lipsync_audio/{sid}.wav"], check=True)
+json.dump([{"shot": sid, "start": round(a, 3), "end": round(b, 3), "dur": round(b - a, 3)} for sid, a, b in LS],
+          open("lipsync_audio/manifest.json", "w"), ensure_ascii=False, indent=1)
+print(len(LS), "lip-sync slices")
