@@ -257,3 +257,24 @@ Also export: SRT, ASS, project JSON, shot list.
 6. Project JSON round-trips (export → import) with no loss.
 
 Ship: source code with a README (install, run, COOP/COEP hosting notes, browser support: latest Chrome/Edge desktop recommended; Safari limits noted), and the default «ما لا يُقال» template pre-loaded.
+
+---
+
+## 11. Generator profile: Google Flow (Omni 1.1 Flash / Veo 3.1) — add as a selectable "Tool profile"
+
+- **Model selector** per shot: `Omni 1.1 Flash` (default), `Veo 3.1 Quality`, `Veo 3.1 Fast`; store per-model clip length (8 s default) and per-shot credit cost.
+- **Reference IDs:** each identity reference can store a tool-specific `media_id` (e.g. the approved character image ID inside Flow). Prompts insert `{REF_ID}`; if no ID is stored, the shot card tells the user to attach the image as an Ingredient instead.
+- **Continuity modes:** `ingredients` (first shot of a scene), `frames` (first frame = last frame of previous shot, §5.1), `extend` (Flow's Extend), and `lineage/edit` (re-generate or edit an existing clip while keeping its motion lineage). The UI records which parent clip each shot descends from and draws the chain.
+- **Locks (applied to every A-roll prompt, editable once per project, never per shot):**
+  `{WARDROBE}` one outfit for the whole episode (e.g. "a dark charcoal turtleneck under a dark camel blazer");
+  `{SET}` "dark mahogany podcast studio, burnt-walnut desk, black broadcast microphone on a boom arm beside his mouth (never covering it), shelves of books softly out of focus, warm amber tungsten practical lamp, gentle haze";
+  `{IDENTITY}` brand.identity (always includes the goatee and the mole above the LEFT corner of the upper lip, image-right).
+  Changing a lock flags every already-generated shot as "needs regeneration".
+- **Five-element prompt schema** (the template editor shows five required fields and refuses to render a prompt with an empty one):
+  1. Subject & character — who, from which reference, wearing `{WARDROBE}`.
+  2. Composition & camera — shot size, angle, lens, one camera move.
+  3. Action & performance — calm, specific, no exaggeration; for A-roll: subtle head tilts, slow blinks, restrained gestures, natural lip movement + the exact Arabic line.
+  4. Lighting & atmosphere — `{SET}` + brand.look.
+  5. Style & constraints — photorealistic cinematic; "No on-screen text, no subtitles, no logos"; for B-roll also "No readable letters or numbers anywhere".
+- **Arabic typography is never requested from the video model.** All Arabic text comes from the SRT and the caption/scene-recipe renderer (§6.4, §9).
+- **Episode shot pack import:** accept a shot list (Markdown/CSV/JSON with `id, tlStart, tlEnd, mode, parent, prompt, dialogue`) such as `full/FLOW_SHOTS_FULL.md` (51 shots: A01–A13 split into ≤ 8 s chained shots, B01–B15), and create the scenes and FlowShots from it.
