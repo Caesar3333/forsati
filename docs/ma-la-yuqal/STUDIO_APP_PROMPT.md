@@ -285,3 +285,79 @@ Ship: source code with a README (install, run, COOP/COEP hosting notes, browser 
   - **Change wardrobe** (one input field + "Apply to all"): rewrites every prompt's `[WARDROBE: …]`, marks generated shots as stale, and offers a per-shot Flow *edit* prompt: "Edit this shot. Change ONLY his clothes to: {new}. Keep exactly the same face, beard, goatee and the mole above the left corner of his upper lip, the same pose, gestures, lip movement, camera, framing, studio, microphone, lamp, lighting and timing."
   - **Change face ID** (new `media_id` or new reference image): rewrites `[FACE: …]` everywhere and asks the user to confirm or edit the identity description (so the old person's features don't leak into prompts); offers the matching Flow edit prompt that keeps clothes, pose, set and timing.
 - **Presets library:** save/load several presets (e.g. "Studio — navy blazer", "Studio — black tee"); switching preset re-renders all prompts and the stale list.
+
+---
+
+## 13. Upload slots registry (every input has its own labelled slot, bound to code, with a built-in "how to prepare it" guide)
+
+Replace the generic upload area with a **slot grid**. Each slot is a card showing: Arabic label + English label, accepted types, required/optional badge, status (empty · validating · ok · warning · error), a thumbnail/waveform, the extracted values, and two buttons: **«دليل التجهيز»** (opens the guide drawer) and **«نسخ أمر التوليد»** (copies the ready prompt). Slots are defined declaratively and drive validation, extraction and data binding — no hard-coded upload logic elsewhere.
+
+```ts
+interface UploadSlot {
+  id: SlotId; labelAr: string; labelEn: string;
+  accept: string[];                     // MIME / extensions
+  multiple: boolean; required: boolean;
+  bindsTo: string;                      // store path, e.g. 'project.masterAudioId', 'brand.identity'
+  validate: (f: File, meta: Probe) => Issue[];        // blocking errors + warnings
+  extract?: (f: File) => Promise<Partial<Project>>;   // IDs, text blocks, timings parsed from the file
+  filenamePattern?: RegExp;             // auto-binding by name (e.g. shot ids, timecodes)
+  idField?: { labelAr: string; pattern: RegExp };     // e.g. Flow media_id typed next to the image
+  guide: { requirements: string[]; mustContain: string[]; rules: string[]; prompt?: string; checklist: string[] };
+}
+```
+
+### 13.1 Slots (implement all; Arabic labels as written)
+
+| # | slot id | التسمية | accepts | binds to | validate / extract |
+|---|---|---|---|---|---|
+| 1 | `masterAudio` | الصوت الرئيسي | .wav .mp3 .m4a (1) | `project.masterAudioId`, `durationSec` | duration, sample rate ≥ 44.1 k, measure LUFS/TP, clipping %, detect silences; warn if LUFS ≠ −14 ±1 (offer one-click normalise) |
+| 2 | `subtitles` | ملف الترجمة | .srt .vtt (1) | `project.cards` | parse, check monotonic times, last cue ≤ audio duration, flag `[؟]` as `uncertain`, cards > 8 words → offer split |
+| 3 | `transcript` | النص الكامل (اختياري) | .txt .md (1) | `project.transcript` | used to cross-check SRT words; diff view |
+| 4 | `faceRef` | صورة الوجه الأساسية | .jpg .png (1) | `brand.refs.face` + `idField: Flow media_id` | ≥ 1024 px short side, one face detected (FaceDetector/MediaPipe), not mirrored (user confirms the mole is on the viewer's right with a click-on-image marker that is saved), mouth not covered |
+| 5 | `characterSheet` | لوحة الهوية (3 زوايا) | .jpg .png (1) | `brand.refs.sheet` + media_id | 16:9, three faces detected |
+| 6 | `mouthDetail` | صورة الشامة واللحية القريبة | .jpg .png (1) | `brand.refs.mouth` | close-up, mole marker placed by the user |
+| 7 | `bodyRef` | صورة الجسم كاملاً | .jpg .png (0–1) | `brand.refs.body` | full body visible |
+| 8 | `identitySpec` | ملف مواصفات الهوية | .md .txt (1) | `brand.identity`, `brand.identityAr` | extract the fenced code block under the heading containing "IDENTITY block" → `brand.identity`; must mention "mole" and "LEFT"; show diff when replaced |
+| 9 | `styleRefs` | صور ستايل الاستوديو | .jpg .png (1–3) | `preset.styleRefs` + media_id each | 9:16 or 3:4, warm studio; first image = front, second = side |
+| 10 | `styleLock` | ملف قفل الستايل | .md (1) | `preset.set`, `preset.wardrobe` | extract the block under "الاستوديو الثابت" → `set`; the `[WARDROBE: …]` value → `wardrobe` |
+| 11 | `brandKit` | الهوية البصرية | .json (1) | `brand` | schema-validate (§2) |
+| 12 | `logo` | الشعار | .svg .png (1) | `brand.logo` | transparent background required for PNG, ≥ 1000 px wide |
+| 13 | `fonts` | الخطوط | .ttf .otf .woff2 (1–4) | `brand.fonts.files` | must include Arabic glyphs (render test string «من متى أنا هيك؟» on canvas and compare widths to a fallback font) |
+| 14 | `plan` | خطة المشاهد | .json (1) | `project.scenes` | `plan.json` format (`aroll[]`, `broll[]`, `cold_open`); timeline invariants |
+| 15 | `shotList` | قائمة أوامر Flow | .md .csv .json (1) | `scenes[].shot` | parse `FLOW_SHOTS_FULL.md`: headings `### A01 — m:ss–m:ss`, shot lines `**A01.2** (x ث)`, fenced prompts, "Frames to Video … A01.1" → `parent` |
+| 16 | `arollClips` | لقطات البودكاست | .mp4 .mov (n) | scenes kind `aroll` | `filenamePattern: /^(A\d{2})(?:\.(\d+))?[_-]/` → scene/shot; fps 30, ≥ 1080×1920 (or 4K), duration ≥ shot duration; strip audio |
+| 17 | `brollClips` | لقطات الموشن | .mp4 .mov .webm .png .jpg (n) | scenes kind `broll` | `/^(B\d{2})(?:\.(\d+))?[_-]/`; no burned-in text (warn if OCR finds letters) |
+| 18 | `flowReturns` | لقطات راجعة من Flow | .mp4 (n) | `scenes[].shot.result` | match by shot id in name; on import auto-extract last frame (§5.1) and attach it as next shot's first frame |
+| 19 | `music` | الموسيقى | .wav .mp3 (0–1) | `audio.music` | ≥ episode length or loopable; licence field (text) required |
+| 20 | `sfx` | المؤثرات الصوتية | .wav .mp3 (n) | `audio.sfx[]` | tag per file: whoosh / hit / swell / tick / scratch / ambience |
+| 21 | `projectTemplate` | قالب مشروع | .json (0–1) | whole store | full restore with confirmation |
+
+Exports (not uploads) appear in an **Outputs** grid: lip-sync audio slices (`A01_000.00-016.13.wav`), last-frame images, SRT/ASS, shot list, final MP4s, cover, project JSON.
+
+### 13.2 Guide drawer content (ship this text; editable in Settings)
+
+Each guide has four parts — **المتطلبات · يجب أن يحتوي · القواعد · أمر جاهز / خطوات** — and a checklist the user ticks before the slot turns green.
+
+- **الصوت الرئيسي** — Requirements: WAV 48 kHz 24-bit preferred (MP3 ≥ 192 kbps ok), mono or stereo, one speaker, the final cut. Must contain: the whole episode, no music under it. Rules: record in a quiet, soft room 15–20 cm from a dynamic mic; no noise reduction artefacts; peaks below −3 dBFS when recording; the app normalises to −14 LUFS. Checklist: no clipping · no background music · final wording.
+- **ملف الترجمة** — Requirements: UTF-8 SRT. Must contain: exact spoken Levantine words, ≤ 8 words per cue, cues aligned to speech. Rules: never paraphrase or translate; mark unsure words with `[؟]`; don't break a word across cues. Steps: export from the app's transcript editor, or any SRT tool, then review by ear.
+- **صورة الوجه الأساسية** — Requirements: ≥ 1024 px, sharp, front, unmirrored. Must contain: full face, eyes, the mole, beard + goatee, mouth uncovered. Rules: soft even light, neutral calm expression, mouth closed or relaxed, no filters, no sunglasses, nothing over the face. Prompt (copy):
+  `Using the attached photos of the same man, create a front-facing head-and-shoulders portrait, unmirrored, eye level, 50mm, soft even warm light, neutral calm expression, mouth relaxed, plain dark background. Keep exactly: {brand.identity}. Natural skin, not beautified. No text.`
+- **لوحة الهوية (3 زوايا)** — Requirements: 16:9, three views. Must contain: front, three-quarter, right profile, same lighting and expression. Rules: plain dark-grey background, mouth closed, identical clothing (plain t-shirt). Prompt (copy):
+  `Using the attached references of the same man, create a clean character reference sheet, 16:9, photorealistic: front view, three-quarter view and right profile side by side, head and shoulders, neutral calm expression, mouth closed, plain dark-grey background, soft even lighting. Keep exactly: {brand.identity}. Wearing a heather warm-grey crew-neck t-shirt. No text, no labels.`
+- **صورة الشامة واللحية القريبة** — Must contain: mouth area from nose to chin, the mole, moustache, soul patch, grey hairs. Rules: real photo, unmirrored, sharp, neutral lips.
+- **ملف مواصفات الهوية** — Must contain: a fenced English block under the heading "IDENTITY block" (the app reads only that block) that states the mole side as LEFT anatomical / viewer's RIGHT. Rules: describe only what is visible in real photos; no AI-written guesses.
+- **صور ستايل الاستوديو** — Requirements: 1–3 stills, 9:16 or 3:4. Must contain: the set (walnut slat wall, shelves, globe lamp, desk, mic on a boom arm), current wardrobe. Rules: mic beside the mouth, never covering it; warm key from camera-left; one front and one side angle. Prompt (copy): the "صورة أساس جديدة للاستوديو" prompt from `STYLE_LOCK.md`, with `{preset.wardrobe}` and `{brand.identity}` filled in.
+- **ملف قفل الستايل** — Must contain: the fixed studio block and one `[WARDROBE: …]` value. Rules: one wardrobe per episode.
+- **الشعار** — SVG preferred; PNG transparent ≥ 2000 px wide; light version for dark backgrounds; safe padding 10 %. Rules: no effects baked in (glow/shadow are added by the app).
+- **الخطوط** — Must contain Arabic glyphs; body font in Light (300) and SemiBold (600); logo font (e.g. Aref Ruqaa). Rules: licensed for video use.
+- **خطة المشاهد / قائمة أوامر Flow** — Must follow the app's schema (download a template from the drawer). Rules: scenes cover the full duration; shots ≤ 8 s; every non-first shot names its parent.
+- **لقطات البودكاست** — Requirements: vertical 9:16, 4K or 1080p, 30 fps, H.264/HEVC, file named `A01.1_take2.mp4`. Must contain: the host at the mic in the locked set and wardrobe, mouth visible. Rules: if self-recorded, clap once at the start while the master audio plays in an earpiece and lip-sync to it; keep the framing still; the clip's own audio is discarded. Checklist: mole visible on viewer's right · wardrobe matches · mic not covering mouth · no mirroring.
+- **لقطات الموشن** — Requirements: 9:16, ≥ 1080 px, ≥ scene length, named `B07.1_*.mp4`. Must contain: the visual idea of the B-roll card. Rules: **no letters or numbers in the image** (Arabic text is added by the app); calm motion, no flashes; palette near-black / ivory / copper.
+- **لقطات راجعة من Flow** — Rules: keep Flow's file, rename to the shot id (`A03.2.mp4`); generate in order so each next shot can use the previous last frame; mute is automatic.
+- **الموسيقى / المؤثرات** — Requirements: WAV/MP3, licensed (licence text required). Rules: music without beats or vocals for this show; SFX short and dry; the app ducks and mixes.
+
+### 13.3 Smart behaviours tied to the slots
+- Uploading `identitySpec`, `styleLock`, `plan` or `shotList` immediately fills the matching fields and re-renders every prompt; the guide drawer shows exactly which values were extracted and from which line.
+- A media_id typed next to an image is validated (UUID-like) and inserted as `{REF_ID}` in prompts; if missing, prompts say "attach `<file name>` as Ingredient".
+- Dropping many files at once onto the grid routes each file to its slot by extension + filename pattern, and lists anything it could not route.
+- A **Readiness panel** shows which slots block which steps (e.g. "Prompts need: faceRef or characterSheet, identitySpec, styleLock"; "Render needs: masterAudio, subtitles, all scenes filled").
