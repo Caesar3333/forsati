@@ -8,12 +8,13 @@ LIMIT = 10.0
 REFLECT = ["حالك", "حالنا", "طبيعتي", "من متى", "بتتعبك", "تسكت", "أصعب حوار", "مع حالنا"]
 JO = ["إشي", "مش", "هيك", "شو", "بدّي", "هالطريقة", "منحاول", "رح"]
 
-VOICE = ("A natural adult male voice with an authentic urban Ammani Jordanian Arabic delivery, speaking as if reflecting privately "
-         "while talking to one listener. Warm, grounded, clear and naturally resonant, without artificially lowering the pitch. "
-         "Preserve colloquial Jordanian vocabulary and pronunciation; natural connected speech, realistic pacing, subtle emotional "
-         "variation, short pauses only where the meaning requires them. Do not switch to Modern Standard Arabic, another Arabic dialect "
-         "or an announcer style. No theatrical acting, whispering, exaggerated sadness or robotic delivery. Speak only the exact Arabic "
-         "dialogue provided: do not add, omit, repeat, translate or paraphrase words. Treat punctuation as pacing guidance, not as spoken content.")
+VOICE = ("A natural adult male voice, warm, grounded and clear, speaking to one listener in a natural urban Ammani Jordanian Arabic "
+         "dialect, not generic Levantine Arabic. Do not imitate Lebanese or Syrian accent patterns, do not switch to Modern Standard Arabic, "
+         "and do not exaggerate the dialect. The speaker himself pronounces qaf as a glottal stop in everyday colloquial words, as urban "
+         "Ammani speakers do; keep this consistent across the clip without changing the written spelling, and do not force a hard qaf. "
+         "Natural Jordanian word linking, conversational rhythm, short pauses only where the meaning requires them. No theatrical acting, "
+         "whispering or robotic delivery. Speak only the supplied dialogue: no additions, omissions, repetitions, translation or "
+         "paraphrase. Treat punctuation as pacing guidance, not as spoken content.")
 PERF = ("Subtle facial expressions, natural blinking, small head movements, restrained hand gestures below the chin, realistic "
         "speech-aligned mouth movement. Keep the whole mouth visible at all times.")
 CAM = {
@@ -348,6 +349,29 @@ w("4. **المسار:** أ (صوتك + مزامنة) ولا ب (صوت Flow)؟ �
 w("5. **طول الأمر:** نجرّب النسخة الكاملة هون، ولا المختصرة (`FLOW_SHOTS_OMNI.md`) مع الاعتماد على بطاقات الوكيل؟")
 w("6. **مدد التوليد الأقصر:** شوف إذا Omni Flash بيعطي خيار أقل من 10 ث.")
 
+w("\n---\n\n## القسم الخامس-ب: Jordanian Pronunciation Test Bank\n")
+w("الكتابة بتضل متل ما هي بالتفريغ (القاف مكتوبة قاف). العمود 3 مأخوذ من كلامك أنت («بلفظ القاف همزة»)، مش من تحليل صوتي، فبيحتاج تأكيدك. الأعمدة 4–8 بتنعبّى بعد ما تسمع التوليد، وما في ولا نتيجة مخترعة.\n")
+w("| # | الكلمة | الجملة (اللقطة) | نطق همّام المفضّل | نطق النموذج فعلياً | نوع الخطأ | الصيغة المختبرة | النتيجة | الصيغة المعتمدة |")
+w("|---|---|---|---|---|---|---|---|---|")
+seen, n = set(), 0
+for s_ in A:
+    for wd in re.findall(r"[\u0621-\u0652]+", s_["line"]):
+        key = wd
+        if key in seen: continue
+        if "ق" in wd and wd != "يُقال": kind = "همزة (حسب كلامك)"
+        elif wd in JO: kind = "عامي أردني طبيعي"
+        else: continue
+        seen.add(key); n += 1
+        ctx = s_["line"]; k = ctx.find(wd); ctx = (("…" if k > 30 else "") + ctx[max(0, k - 30):k + len(wd) + 30].strip() + "…").replace("……", "…").replace("… …", "…")
+        w(f"| {n} | {wd} | {ctx} ({s_['id']}) | {kind} | بحاجة إلى اختبار | — | {wd} | — | — |")
+w("\n«يُقال» (اسم البودكاست) مستثناة: فصحى بالقاف.\n")
+w("\n### عينات اختبار اللهجة الإلزامية (من مكتبة اللهجة — مش من الحلقة)\n")
+w("هالجمل للاختبار بس، وما بتدخل الحلقة. ولّدها بأمر A08.1 نفسه بعد ما تبدّل الحوار، والإطار الأول K_front_a.jpg. هي بتقيس النموذج، مش كلامك.\n")
+for nm, ln in (("القاف", "قلتله: بتقدر تراجع قرارك، حتى لو كنت مقتنع فيه من زمان؟"),
+               ("المفردات الأردنية", "خلّيني أحكيلك شغلة. مش كل إشي بنسمعه بنفهمه، ومش كل تفسير بنوصل إله بكون صحيح."),
+               ("الأسلوب التأملي", "يمكن المشكلة مش باللي صار… يمكن بالطريقة اللي فهمنا فيها اللي صار.")):
+    w(f"- **{nm}:** «{ln}»")
+w("\nاسمعها مقابل تسجيلك الحقيقي. ارفض أي عينة فيها نبرة سورية أو لبنانية، أو قاف بتتذبذب بين همزة وقاف بنفس المقطع، حتى لو الصوت واضح.")
 w("\n---\n\n## القسم السادس: اختبار الصوت (3 لقطات)\n")
 w("ولّد هالثلاث لقطات بنفس الأوامر اللي بالقسم الثالث، واسمع كل وحدة مقابل مقطع تسجيلك بنفس الاسم من `lipsync_audio/`. ولا تعتبر النطق ناجح قبل ما تسمعه.\n")
 for tag, s in (("كلام تأملي هادئ", t1), ("أسئلة متتابعة", t2), ("مفردات أردنية", t3)):
