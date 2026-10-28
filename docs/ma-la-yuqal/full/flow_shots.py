@@ -4,15 +4,17 @@ import json
 from phrases import P
 plan = json.load(open("plan.json"))
 REF = "{REF_ID}"                       # the approved character image / media_id in Flow
-WARDROBE = "{WARDROBE}"
+WARDROBE = "a navy-blue unstructured wool blazer over a heather-grey crew-neck t-shirt"   # [WARDROBE] — change here or find-replace in the prompts
 IDENT = ("Keep his exact identity from the reference: short dark hair with receding temples, trimmed beard, "
          "moustache with goatee, grey hairs in the beard, small dark mole above the LEFT corner of his upper lip "
          "(image-right when he faces camera). Natural skin texture, not beautified.")
-SET = ("dark mahogany podcast studio, burnt-walnut desk, black broadcast microphone on a boom arm beside his mouth "
-       "(never covering it), shelves of books softly out of focus, warm amber tungsten practical lamp, gentle haze")
-LOOK = "cinematic low-key warm lighting, amber bokeh, teal-black shadows, rich earth tones, fine film grain, shallow depth of field"
+SET = ("warm, intimate podcast studio: dark walnut vertical-slat acoustic wall, wooden shelves with a few books, an amber "
+       "glass globe lamp with a glowing Edison filament, light walnut desk in the foreground, black dynamic podcast "
+       "microphone on a boom arm at chin height beside his mouth (never covering it)")
+LOOK = "soft warm key light from camera-left, gentle falloff into shadow, amber practical glow, warm walnut tones with deep navy, natural skin, shallow depth of field (f/2), fine film grain, photographic realism"
 CONT = "Begin exactly from the provided first frame (last frame of the previous shot): same person, clothes, set, light and lens; continue the motion with no cut."
-ANGLES = [("Medium close-up, eye level, very slow push-in", "أمامية"), ("Three-quarter side angle from his left, 85mm, slow lateral drift", "جانبية")]
+ANGLES = [("Front medium close-up, eye level, 50mm, microphone entering from frame-right, very slow push-in", "أمامية"),
+          ("Three-quarter angle from his right side, 85mm, microphone in the foreground frame-left, slow lateral drift", "جانبية")]
 B = {
  "B01": "Abstract dark space; a single glowing copper question-mark outline slowly forms from drifting dust, then a second fainter question mark appears behind it like a reflection, as if a memory is being re-examined. Slow push-in.",
  "B02": "Old faded photographs float slowly in a dark void like memories, gently rotating; one by one they lose colour and dissolve into warm dust, while a soft amber light remains where they were. Slow drift.",
@@ -53,7 +55,7 @@ for kind, it in items:
             L.append(f"**{sid}.{k}** ({b - a:.1f} ث) {'— Ingredients: ' + REF if k == 1 else '— Frames to Video: أول إطار = آخر إطار من ' + sid + '.' + str(k - 1)}\n")
             L.append("```\n" + " ".join(filter(None, [
                 f"{ang}, vertical 9:16, 8 seconds.",
-                f"Hammam Deek (the man in reference {REF}), a calm, thoughtful podcast host in {WARDROBE}, seated in a {SET}.",
+                f"Hammam Deek [FACE: the man in reference {REF}], a calm, thoughtful podcast host [WARDROBE: {WARDROBE}], seated in a {SET}.",
                 "He speaks to an unseen listener just off-camera with calm, sincere delivery: subtle head tilts, slow blinks, occasional restrained hand gesture, expressive eyes; lip movement natural and unhurried.",
                 f'He says in Levantine Arabic: "{line}"',
                 CONT if k > 1 else "",
@@ -75,11 +77,11 @@ for kind, it in items:
                 f"Lighting & atmosphere: {LOOK}. Palette: near-black #0B0D10, ivory, muted copper #B8835A.",
                 "No people unless described. No readable text, letters or numbers anywhere in the image (Arabic typography is added in the edit).",
                 "Calm, slow, elegant motion; no flashes, no shake."])) + "\n```\n")
-head = f"""# أوامر Google Flow للحلقة الكاملة ({n} لقطة)
+head = f"""# أوامر Google Flow للحلقة الكاملة ({n} لقطة) — ستايل الاستوديو المعتمد
 
 **قبل النسخ، استبدل:**
-- `{REF}` ← معرّف صورة الشخصية المعتمدة في Flow (media_id) أو ارفعها كـ Ingredient.
-- `{WARDROBE}` ← لبس واحد ثابت لكل الحلقة، مثل: `a dark charcoal turtleneck under a dark camel blazer` أو `a black t-shirt under a charcoal blazer`.
+- `{REF}` ← معرّف صورة وجهك في Flow (media_id)، أو ارفع `refs/style/studio_front.jpg` كـ Ingredient. لتغيير الوجه، غيّر هذا المعرّف فقط.
+- **اللبس مثبّت:** بليزر كحلي فوق تيشيرت رمادي. لتغييره، استبدل ما بين `[WARDROBE: …]` في كل الأوامر دفعة واحدة (ابحث واستبدل). التفاصيل في `STYLE_LOCK.md`.
 
 **قواعد التسلسل:**
 - **أول لقطة في كل مشهد:** وضع Ingredients to Video، مع الصورة المرجعية.
