@@ -17,3 +17,10 @@ STOP adding features. Your own screens contradict your report, which means some 
 
 ## Report
 Paste the runner table after loading the kit files from scratch in a **new project** (not the template), including the file hashes. Then download `rough_0-20.mp4`, `preview_0-20.mp4`, `frames_qc.zip`, `render_qc.json` — I will verify them independently.
+
+## Addendum — evidence from your own `render_qc.json` (2026-10-28T01:03:22Z)
+- `"voiceLevelDB": -100`, `"tonePeak220HzDB": -100`, `"tonePeak330HzDB": -100` → the measured audio is **digital silence** (or the measurement never ran). That contradicts `"integratedLUFS": -14.1` and `"truePeakDBTP": -1.2` in the same file, and `"voiceNaturalNoNotch": true` cannot be true with −100 dB. Find out whether the exported audio is silent (master audio not mixed) or the meter isn't reading the file, fix the real cause, and make the QC JSON derive LUFS/TP/levels from the same decoded buffer.
+- `"durationSec": 20`, `"durationDiffSec": 0`, `"avDurationDiffMs": 0` → report the decoded video and audio track durations separately with 3 decimals (e.g. 20.000 / 20.011), never the requested range.
+- `overallPass: true` must be false whenever any measured value is missing, −100/NaN, or contradicts another field.
+- **Export presets screen:** "Final Master 9:16" and "Clean Master" are labelled **1920×1080** → must be **1080×1920** for 9:16.
+- **Shot catalog (فهرس اللقطات الكامل):** selecting the "بودكاست أمامية وجانبية (A01–A13)" filter shows an empty list — the 31 A-roll shots must be listed (and 20 for B01–B15, 51 for الكل).
