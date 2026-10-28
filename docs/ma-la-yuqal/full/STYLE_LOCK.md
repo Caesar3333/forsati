@@ -7,9 +7,12 @@
 
 | الخانة | القيمة الحالية | كيف تغيّرها |
 |---|---|---|
-| `[FACE: …]` | الرجل في الصورة المرجعية `{REF_ID}` | ضع معرّفاً جديداً للوجه، أو ارفع صورة جديدة كـ Ingredient |
-| `[WARDROBE: …]` | a navy-blue unstructured wool blazer over a heather warm-grey crew-neck t-shirt | استبدل النص بين القوسين في كل الأوامر دفعة واحدة |
+| `FACE` | الرجل في الصورة المرجعية `{REF_ID}` | ضع معرّفاً جديداً للوجه، أو ارفع صورة جديدة كـ Ingredient |
+| `WARDROBE` | a navy-blue unstructured wool blazer over a heather warm-grey crew-neck t-shirt | استبدل النص بين القوسين في كل الأوامر دفعة واحدة |
 | `SET` | الاستوديو أدناه | لا يتغير، وهو هوية البرنامج |
+
+## اللبس الحالي (سطر واحد يقرأه التطبيق)
+[WARDROBE: a navy-blue unstructured wool blazer over a heather warm-grey crew-neck t-shirt]
 
 ## الاستوديو الثابت (لا تعدّله)
 ```
@@ -43,5 +46,5 @@ Edit this shot. Replace the person's face and identity with the man in reference
 ## صورة أساس جديدة للاستوديو (للبدء من لبس آخر)
 ```
 Using the attached references: reference 1 is the man's identity (face, beard, goatee, the mole above the left corner of his upper lip); references 2–3 are the studio style.
-Create a vertical 9:16 photorealistic still of this same man [WARDROBE: …] seated at a light walnut desk in the same studio: dark walnut vertical-slat acoustic wall, wooden shelves with a few books, an amber glass globe Edison lamp. A black dynamic podcast microphone on a boom arm at chin height beside his mouth, not covering it. Front medium close-up, eye level, 50mm, soft warm key light from camera-left, shallow depth of field, natural skin texture, not beautified. Calm, thoughtful expression, mid-sentence, one hand in a relaxed open gesture. No text, no logos.
+Create a vertical 9:16 photorealistic still of this same man {WARDROBE} seated at a light walnut desk in the same studio: dark walnut vertical-slat acoustic wall, wooden shelves with a few books, an amber glass globe Edison lamp. A black dynamic podcast microphone on a boom arm at chin height beside his mouth, not covering it. Front medium close-up, eye level, 50mm, soft warm key light from camera-left, shallow depth of field, natural skin texture, not beautified. Calm, thoughtful expression, mid-sentence, one hand in a relaxed open gesture. No text, no logos.
 ```
