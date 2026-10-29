@@ -171,7 +171,8 @@ const Labels = () => {
   const pull = inOut(interpolate(t, [back - 0.1, back + 1.6], [0, 1], clamp));
   return (
     <AbsoluteFill style={{opacity: o, transform: `scale(${1 - 0.45 * pull}) translateY(${-120 * pull}px)`, filter: `blur(${pull * 6}px)`}}>
-      <Line words={pick('labels', 0, 'بجمل جاهزة')} top={300} size={96} emph={['جاهزة']} hide={C.start + 0.3} />
+      <Line words={pick('labels', 0, 'تعوّدنا نحكي عن حالنا')} top={190} size={70} hide={C.start + 0.3} style={{opacity: 0.85}} />
+      <Line words={pick('labels', 0, 'بجمل جاهزة')} top={320} size={96} emph={['جاهزة']} hide={C.start + 0.3} />
       {TAGS.map((g, i) => {
         const at = L.phrases[g.pi].t0;
         const p = out(interpolate(t, [at - 0.08, at + 0.35], [0, 1], clamp));
@@ -203,7 +204,7 @@ const Climax = () => {
   const breathe = 1 + 0.02 * Math.sin((t - q.t0) * 2.2) * (t > q.t0 ? 1 : 0);
   return (
     <AbsoluteFill style={{opacity: o}}>
-      <Line words={pick('climax', 0, 'تعريف نهائي')} top={1380} size={74} hide={wordT('climax', 1, 'رجعت') + 0.3} style={{opacity: 0.9}} />
+      <Line words={pick('climax', 0, 'تعريف نهائي')} top={1380} size={74} hide={wordT('climax', 1, 'رجعت') - 0.1} style={{opacity: 0.9}} />
       <Line words={lead} top={1380} size={78} hide={q.t0 - 0.05} />
       <AbsoluteFill style={{background: `radial-gradient(circle at 50% 46%, rgba(255,200,140,${0.5 * burst}) 0%, rgba(184,131,90,${0.25 * burst}) 25%, rgba(0,0,0,0) 55%)`, mixBlendMode: 'screen'}} />
       <div style={{position: 'absolute', left: 0, right: 0, top: 640, transform: `scale(${breathe})`}}>
@@ -228,6 +229,7 @@ const Wound = () => {
       <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 48%, rgba(180,200,205,${0.07 * fog}) 0%, rgba(0,0,0,0) 60%)`, filter: 'blur(20px)'}} />
       <Line words={pick('wound', 0, 'ما كنت دايماً عصبي…')} top={520} size={96} emph={['دايماً']} hide={talk - 0.15} />
       <Line words={pick('wound', 0, 'ما كنت دايماً تخاف تثق')} top={760} size={84} hide={talk - 0.15} />
+      <Line words={pick('wound', 0, 'يمكن تكتشف')} top={640} size={120} hide={wordT('wound', 0, 'ما') - 0.05} />
       <Line words={pick('wound', 1, 'بيوم من الأيام')} top={380} size={70} hide={W.end + 0.1} style={{opacity: 0.85}} />
       <Line words={pick('wound', 1, 'كنت تحكي عن اللي بوجعك…')} top={560} size={96} emph={['بوجعك…']} hide={W.end + 0.1} />
       <Line words={pick('wound', 1, 'قبل ما تتعلّم تسكت')} top={860} size={120} emph={['تسكت']} hide={W.end + 0.1} dimWord="تسكت" dimAt={silent + 0.5} />
@@ -243,6 +245,7 @@ const NewQuestion = () => {
   return (
     <AbsoluteFill style={{opacity: o, ...push(t, Q.start, Q.end)}}>
       <Line words={pick('new_question', 0, 'نوع مختلف من الفهم')} top={700} size={96} emph={['الفهم']} hide={why - 0.1} />
+      <Line words={pick('new_question', 0, 'وهون بالنسبة إلي…')} top={680} size={110} hide={wordT('new_question', 0, 'نوع') - 0.05} />
       <Line words={pick('new_question', 1, 'ما تكتفي تسأل:')} top={460} size={74} hide={second - 0.05} style={{opacity: 0.85}} />
       <Line words={pick('new_question', 1, 'بل تسأل كمان:')} top={460} size={74} hide={Q.end + 0.15} style={{opacity: 0.85}} />
       <Line words={pick('new_question', 1, 'ليش أنا هيك؟')} top={700} size={130} hide={will + 0.15} style={{opacity: 0.85}} />
