@@ -32,7 +32,7 @@ const V = [
 ];
 (async () => {
   fs.mkdirSync(outDir, {recursive: true});
-  const b = await chromium.launch(); const p = await b.newPage({viewport: {width: 1080, height: 1080}});
+  const b = await chromium.launch(); const p = await b.newPage({viewport: {width: 1080, height: 1080}, deviceScaleFactor: Number(process.env.SCALE || 1)});
   for (const v of V) {
     await p.setContent(`<style>${css}</style><div class="s ${v.cls}" lang="ar">${grain}<div class="ring"></div>${v.html}</div>`);
     await p.evaluate(() => document.fonts.ready);

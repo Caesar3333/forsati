@@ -51,7 +51,7 @@ const body = (s) => {
   throw new Error('unknown slide type ' + s.type);
 };
 (async () => {
-  const b = await chromium.launch(); const p = await b.newPage({viewport: {width: 1080, height: 1350}});
+  const b = await chromium.launch(); const p = await b.newPage({viewport: {width: 1080, height: 1350}, deviceScaleFactor: Number(process.env.SCALE || 1)});
   for (const [name, c] of Object.entries(spec)) {
     const dir = path.join(outDir, name); fs.mkdirSync(dir, {recursive: true});
     const n = c.slides.length;
