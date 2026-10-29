@@ -24,6 +24,11 @@ const V = [
   {id: 'logo_2_slogan', cls: 'dark', html: `<div class="logo" style="font-size:230px;color:#C9925F;text-shadow:0 0 60px rgba(233,180,122,.35)">ما لا يُقال</div><div class="line"></div><div class="slogan" style="color:#EDE6D6">مساحة نراجع فيها</div>`},
   {id: 'logo_3_podcast', cls: 'dark', html: `<div class="logo" style="font-size:230px;color:#C9925F;text-shadow:0 0 60px rgba(233,180,122,.35)">ما لا يُقال</div><div class="line"></div><div class="slogan" style="color:#CFC6B5">بودكاست همام ديك</div>`},
   {id: 'logo_4_light', cls: 'light', html: `<div class="logo" style="font-size:300px;color:#2a1d12">ما لا<br>يُقال</div><div class="line"></div>`},
+  {id: 'logo_5_ring_slogan', cls: 'dark', html: `<svg width="1080" height="1080" style="position:absolute;inset:0"><defs><path id="arc" d="M 200 600 A 340 340 0 0 0 880 600"/></defs>
+    <text font-family="Plex" font-weight="300" font-size="64" fill="#CFC6B5" direction="rtl"><textPath href="#arc" startOffset="50%" text-anchor="middle">مساحة نراجع فيها</textPath></text></svg>
+    <div class="logo" style="font-size:250px;color:#C9925F;text-shadow:0 0 60px rgba(233,180,122,.35);margin-top:-130px">ما لا<br>يُقال</div>`},
+  {id: 'logo_6_quotes_mark', cls: 'dark', html: `<div style="display:flex;align-items:center;gap:10px;color:#B8835A;font-family:Ruqaa;font-weight:700">
+    <span style="font-size:330px;opacity:.9;line-height:1">«</span><span class="logo" style="font-size:170px;color:#EDE6D6">ما لا<br>يُقال</span><span style="font-size:330px;opacity:.9;line-height:1">»</span></div>`},
 ];
 (async () => {
   fs.mkdirSync(outDir, {recursive: true});
