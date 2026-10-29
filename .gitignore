@@ -8,3 +8,6 @@ node_modules/
 .env.development
 infra/nginx/certs/
 .DS_Store
+docs/ma-la-yuqal/reel/audio/
+docs/ma-la-yuqal/reel/out/render.log
+docs/ma-la-yuqal/reel/out/reel_raw.mp4
