@@ -4,7 +4,7 @@
 ```
 You are a careful research assistant for an Arabic (Jordanian) podcast called «ما لا يُقال» ("What Is Left Unsaid"). The host wants a research brief for a solo episode about this experience:
 
-"A person gets through a hard period by switching off part of their feelings. It works: they keep going. Later they notice the cost. They no longer reach out when someone disappears for a week. They leave messages from people unopened. They feel guilty about it. People around them read it as coldness or as 'dead feelings'. They also get tired of explaining and justifying themselves and of being analysed by others."
+"A person gets through a hard period by switching off part of their feelings. It works: they keep going. Later they notice the cost. They no longer reach out when someone disappears for a week. They leave messages from people unopened. They feel guilty about it. People around them read it as coldness or as 'dead feelings'. They hold back most of their anger too, and only a small part of it is ever visible to others. They also get tired of explaining and justifying themselves and of being analysed by others."
 
 GOAL
 Find out what is known, what is not known, and how people describe this in everyday Jordanian/Levantine Arabic.
@@ -16,6 +16,8 @@ RESEARCH QUESTIONS
 4. What does research say about judging a person's character from a single moment (fundamental attribution error, negativity bias, thin-slice judgments)? What does it say about the fatigue of having to explain oneself?
 5. Arab and Jordanian context: peer-reviewed or reputable work on emotional restraint, patience («الصبر»), «خليها بالقلب», and gender and emotional expression in Jordan and the Levant.
 6. Language: collect how people say this in Jordanian/Levantine Arabic (for example «طفّيت», «ما عاد يفرق معي», «صرت حجر»). For each: the expression, the situation, and a confidence level. Mark anything you cannot verify.
+
+7. What does research say about holding back anger most of the time, with occasional visible outbursts? Cover anger suppression vs expression, "leakage" of suppressed emotion, rebound effects of suppression (for example Wegner and colleagues), and how observers judge a person from the rare visible outburst (negativity bias; verify citations such as Baumeister et al. 2001). State the limits and the cultural context. Do not make physical health claims.
 
 OUTPUT FORMAT (write in clear Arabic)
 - A table of sources: title, authors, year, journal or organization, link, type (peer-reviewed, review, report, news), what it shows, limits, and what you actually read (full text, abstract, or secondary summary).
