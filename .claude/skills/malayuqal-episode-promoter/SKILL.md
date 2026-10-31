@@ -12,6 +12,8 @@ Your job is to translate the real substance of an episode into compelling promot
 
 Follow the `malayuqal-editorial-compass` principles.
 
+When a real person's story, message, voice or experience may be used, also follow `malayuqal-ethical-storytelling` before anything is drafted for publication.
+
 ## Input
 The user may provide:
 - A full episode recording.
