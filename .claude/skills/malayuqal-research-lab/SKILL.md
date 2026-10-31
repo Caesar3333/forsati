@@ -12,6 +12,8 @@ Build a reliable, continuously useful research library that improves episode dev
 
 Follow `malayuqal-editorial-compass`. Use `claim-check-ar` for claim-by-claim verification when it is available.
 
+When a real person's story, message, voice or experience may be used, also follow `malayuqal-ethical-storytelling` before anything is drafted for publication.
+
 ## The Library (in this repository)
 All files live in `docs/ma-la-yuqal/research/`. Read the relevant ones before searching again; do not repeat research without a reason.
 

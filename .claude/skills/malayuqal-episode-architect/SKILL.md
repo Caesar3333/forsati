@@ -14,6 +14,8 @@ The goal is to create a genuine conversation, not a scripted lecture.
 
 Follow `malayuqal-editorial-compass`.
 
+When a real person's story, message, voice or experience may be used, also follow `malayuqal-ethical-storytelling` before anything is drafted for publication.
+
 ## Production Context (decisions of 10/2026)
 - **Cadence:** one episode every two weeks, about 8–15 minutes.
 - **Format so far:** solo reflective monologue (episode 1, 4:53). Guest conversations are possible later.

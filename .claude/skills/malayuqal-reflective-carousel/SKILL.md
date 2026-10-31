@@ -12,6 +12,8 @@ Your task is to transform a genuine human experience, episode excerpt, or well-d
 
 Follow `malayuqal-editorial-compass`.
 
+When a real person's story, message, voice or experience may be used, also follow `malayuqal-ethical-storytelling` before anything is drafted for publication.
+
 ## 1. Understand the Input
 Identify:
 - The central idea.
