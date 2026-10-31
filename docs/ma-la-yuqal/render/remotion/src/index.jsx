@@ -10,6 +10,7 @@ import data from './data.json';
 import {FilmV2} from './v2.jsx';
 import {Reel} from './reel.jsx';
 import reel from './reel.json';
+import {Short, SHORT_IDS, shortFrames} from './shorts.jsx';
 
 const IVORY = '#EDE6D6';
 const COPPER = '#B8835A';
@@ -260,6 +261,8 @@ registerRoot(() => (
       fps={data.fps} width={1080} height={1920} />
     <Composition id="MaLaYuqalV2" component={FilmV2} durationInFrames={Math.round(data.total * data.fps)}
       fps={data.fps} width={1080} height={1920} />
+    {SHORT_IDS.map(id => <Composition key={id} id={id.replace(/_/g, '-')} component={Short} defaultProps={{id}}
+      durationInFrames={shortFrames(id)} fps={30} width={1080} height={1920} />)}
     <Composition id="Reel" component={Reel} durationInFrames={Math.round(reel.duration * 30)} fps={30} width={1080} height={1920} />
   </>
 ));

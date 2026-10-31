@@ -1,0 +1,8 @@
+{
+ "r1_min_mata": {"title": "من متى أنا هيك؟", "segs": [[28, 32], [33, 35]], "hold_after": 1.3, "hit": [35, "من"], "chords": "tension"},
+ "r2_taskot": {"title": "قبل ما تتعلّم تسكت", "segs": [[38, 39], [40, 41]], "hit": [41, "بتتعبك"], "chords": "tender"},
+ "r3_alam_kamel": {"title": "عالم كامل جوّا", "segs": [[49, 52]], "hit": [52, "يسمعه"], "chords": "warm"},
+ "r4_almadi": {"title": "ما بنحتاج نغيّر الماضي", "segs": [[74, 76], [77, 77]], "hit": [76, "نفهم"], "chords": "warm"},
+ "r5_intiba3": {"title": "انطباع من لحظة", "segs": [[18, 22]], "hit": [22, "الحقيقة"], "chords": "tension"},
+ "r6_as3ab_hiwar": {"title": "أصعب حوار", "segs": [[59, 61]], "hit": [59, "حالنا"], "chords": "tender"}
+}
