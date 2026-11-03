@@ -94,6 +94,7 @@ services:
     environment:
       APP_PORT: 8003
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      HEYGEN_API_KEY: ${HEYGEN_API_KEY:-}
       REQUEST_LOG_LEVEL: ${REQUEST_LOG_LEVEL:-INFO}
     ports:
       - "${AI_PORT:-8003}:8003"
