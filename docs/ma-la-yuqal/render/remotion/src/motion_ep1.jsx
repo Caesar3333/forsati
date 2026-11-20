@@ -98,7 +98,7 @@ const MotionScene = ({name, s}) => {
   return (
     <AbsoluteFill style={{opacity: fadeIn}}>
       {m.kind === 'lamp' ? <Lamp dur={dur} /> : <Stage bloom={bloom} />}
-      {m.title && <div style={{position: 'absolute', top: 300, left: 0, right: 0, textAlign: 'center', fontFamily: RUQAA, fontWeight: 700, fontSize: 84,
+      {m.title && <div style={{position: 'absolute', top: 600, left: 0, right: 0, textAlign: 'center', fontFamily: RUQAA, fontWeight: 700, fontSize: 76,
         color: IVORY, opacity: appear(f, m.title[0], m.title[1] - s.start, 0.6, 0.5), textShadow: '0 4px 30px rgba(0,0,0,.8)'}}>ما لا يُقال</div>}
       {phases.map((ph, k) => {
         const lines = m.lines.filter(l => (l.phase ?? 0) === k);
